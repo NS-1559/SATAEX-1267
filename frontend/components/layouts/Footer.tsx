@@ -194,7 +194,7 @@ const Footer: FC = () => {
             mt: 2,
           }}
         >
-          © 2021 SATAEX - All rights reserved.
+          {t('app.footer.copyright')}
         </Typography>
         <Typography
           variant="body2"

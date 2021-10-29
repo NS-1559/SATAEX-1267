@@ -1,3 +1,32 @@
 {
+  "app.header.buy-crypto": "Mua crypto",
+  "app.header.markets": "Thị trường",
+  "app.header.trade": "spot",
+  "app.header.logIn": "đăng nhập",
+  "app.header.signUp": "đăng ký",
+  "app.header.en": "EN",
+  "app.header.vi": "VI",
+  "app.header.jp": "JP",
+
+  "app.footer.products": "sản phẩm",
+  "app.footer.spot": "spot",
+  "app.footer.inverse-perpetual": "Nghịch đảo vĩnh viễn",
+  "app.footer.usdt-perpetual": "USDT vĩnh viễn",
+  "app.footer.inverse-futures": "Tương lai Nghịch đảo",
+  "app.footer.services": "Dịch vụ",
+  "app.footer.buy-crypto": "mua crypto",
+  "app.footer.markets": "thị trường",
+  "app.footer.trading-fee": "Phí giao dịch",
+  "app.footer.api": "API",
+  "app.footer.support": "Hỗ trợ",
+  "app.footer.sataex-learn": "Tìm hiểu SATAEX",
+  "app.footer.help-center": "Hỗ trợ",
+  "app.footer.about": "Thông tin",
+  "app.footer.about-sataex": "Về SATAEX",
+  "app.footer.blog": "Blog",
+  "app.footer.copyright": "© 2021 SATAEX - Bảo lưu mọi quyền.",
+  "app.footer.terms-of-service": "Đièu khoản dịch vụ",
+  "app.footer.privacy-terms": "Quyền riêng tư",
+
   "app.home.title": "Trang chủ"
 }
