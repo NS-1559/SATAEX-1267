@@ -7,6 +7,10 @@
   "app.header.en": "EN",
   "app.header.vi": "VI",
   "app.header.jp": "JP",
+  "app.header.select-language": "Chọn ngôn ngữ",
+  "app.header.english": "English",
+  "app.header.vietnamese": "Tiếng Việt",
+  "app.header.japanese": "日本語",
 
   "app.footer.products": "sản phẩm",
   "app.footer.spot": "spot",
