@@ -3,17 +3,11 @@
     "next",
     "next/core-web-vitals",
     "airbnb-typescript",
-    "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "jest",
-    "jsx-a11y"
-  ],
+  "plugins": ["react", "@typescript-eslint", "jest", "jsx-a11y"],
   "env": {
     "browser": true,
     "es6": true
@@ -35,7 +29,6 @@
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "react/jsx-no-bind": "off",
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/naming-convention": "off",
@@ -49,6 +42,8 @@
     "consistent-return": "off",
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
+    "react/jsx-no-bind": "off",
+    "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",

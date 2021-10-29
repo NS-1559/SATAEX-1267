@@ -1,3 +1,12 @@
 {
+  "app.header.buy-crypto": "Buy crypto",
+  "app.header.markets": "Markets",
+  "app.header.trade": "Spot",
+  "app.header.logIn": "Log in",
+  "app.header.signUp": "Sign up",
+  "app.header.en": "EN",
+  "app.header.vi": "VI",
+  "app.header.jp": "JP",
+
   "app.home.title": "Home"
 }

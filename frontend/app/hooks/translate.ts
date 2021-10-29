@@ -18,5 +18,5 @@ export const useTranslate = () => {
     return language[key];
   }
 
-  return t;
+  return { t, locale };
 };
