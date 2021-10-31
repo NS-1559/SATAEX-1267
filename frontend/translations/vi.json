@@ -1,4 +1,7 @@
 {
+  "app.global.name": "SATAEX",
+  "app.global.description": "SATAEX là một trong những sàn giao dịch tiền điện tử phát triển nhanh nhất, với hơn 2 triệu người dùng đã đăng ký. Bạn có thể mua và bán tiền điện tử ngay lập tức hoặc giao dịch các đồng tiền phổ biến trên các loại hợp đồng khác nhau tùy thích.",
+
   "app.header.buy-crypto": "Mua crypto",
   "app.header.markets": "Thị trường",
   "app.header.trade": "spot",
@@ -32,5 +35,5 @@
   "app.footer.terms-of-service": "Đièu khoản dịch vụ",
   "app.footer.privacy-terms": "Quyền riêng tư",
 
-  "app.home.title": "Trang chủ"
+  "app.home.title": "Sàn giao dịch tiền điện tử"
 }

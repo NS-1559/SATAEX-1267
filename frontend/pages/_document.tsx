@@ -22,6 +22,7 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="theme-color" content={theme.palette.primary.main} />
           <meta property="og:type" content="website" />
+          <link rel="icon" href="/favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

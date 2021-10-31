@@ -1,4 +1,7 @@
 {
+  "app.global.name": "SATAEX",
+  "app.global.description": "SATAEX is one of the fastest growing cryptocurrency exchanges, with more than 2 million registered users. You can buy and sell crypto instantly, or trade popular coins across different contract types as you’d like.",
+
   "app.header.buy-crypto": "buy crypto",
   "app.header.markets": "markets",
   "app.header.trade": "spot",
@@ -32,5 +35,5 @@
   "app.footer.terms-of-service": "Terms of Service",
   "app.footer.privacy-terms": "Privacy Terms",
 
-  "app.home.title": "Home"
+  "app.home.title": "Cryptocurrency Trading Platform"
 }

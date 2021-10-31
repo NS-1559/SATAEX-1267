@@ -1,3 +1,39 @@
 {
-  "app.home.title": "ホーム"
+  "app.global.name": "サタエックス",
+  "app.global.description": "世界第1位のタイトなスプレッドと世界有数の高い流動性。最大レバレッジ100倍。安定したサーバーと強固なセキュリティを提供しています。日本語のサポート。登録ユーザー数250万人。口座開設最短５分。",
+
+  "app.header.buy-crypto": "暗号資産を購入",
+  "app.header.markets": "相場情報",
+  "app.header.trade": "トレード",
+  "app.header.logIn": "ログイン",
+  "app.header.signUp": "サインアップ",
+  "app.header.en": "EN",
+  "app.header.vi": "VI",
+  "app.header.jp": "JP",
+  "app.header.select-language": "言語を選択",
+  "app.header.english": "English",
+  "app.header.vietnamese": "Tiếng Việt",
+  "app.header.japanese": "日本語",
+
+  "app.footer.products": "プロダクト",
+  "app.footer.spot": "現物",
+  "app.footer.inverse-perpetual": "インバース無期限",
+  "app.footer.usdt-perpetual": "USDT無期限",
+  "app.footer.inverse-futures": "インバース型先物",
+  "app.footer.services": "サービス",
+  "app.footer.buy-crypto": "暗号資産を購入",
+  "app.footer.markets": "相場情報",
+  "app.footer.trading-fee": "手数料について",
+  "app.footer.api": "アフィリエイト",
+  "app.footer.support": "サポート",
+  "app.footer.sataex-learn": "サタエックス アカデミー",
+  "app.footer.help-center": "ヘルプセンター",
+  "app.footer.about": "企業情報",
+  "app.footer.about-sataex": "サタエックスについて",
+  "app.footer.blog": "ブログ",
+  "app.footer.copyright": "© 2021 サタエックス - 全著作権所有",
+  "app.footer.terms-of-service": "利用規則",
+  "app.footer.privacy-terms": "プライバシーポリシー",
+
+  "app.home.title": "暗号資産取引所"
 }

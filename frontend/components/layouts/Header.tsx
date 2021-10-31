@@ -102,7 +102,9 @@ const Header: FC = () => {
         }}
       >
         <Box width={104} height={20} sx={{ ml: 2 }}>
-          <Image src={logo} width={104} height={20} alt="logo" />
+          <Link href="/">
+            <Image src={logo} width={104} height={20} alt="logo" />
+          </Link>
         </Box>
         <Box sx={{ display: 'flex', ml: 2, flexGrow: 1 }}>
           {navLinks.map(({ href, label }) => (
