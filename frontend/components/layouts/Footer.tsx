@@ -17,7 +17,7 @@ import { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   footerLinkTitle: {
-    color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
   },
   footerLink: {
     color: 'white',

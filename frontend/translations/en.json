@@ -35,5 +35,21 @@
   "app.footer.terms-of-service": "Terms of Service",
   "app.footer.privacy-terms": "Privacy Terms",
 
-  "app.home.title": "Cryptocurrency Trading Platform"
+  "app.home.title": "Cryptocurrency Trading Platform",
+
+  "app.auth.email": "Email",
+  "app.auth.password": "Password",
+  "app.auth.first-name": "First name",
+  "app.auth.last-name": "Last name",
+  "app.auth.required": "Bot be empty",
+  "app.auth.invalid-email": "Invalid email",
+  "app.auth.invalid-password": "Minimum 8 characters, including letters and numbers",
+
+  "app.login.title": "Login",
+  "app.login.header": "Welcome to SATAEX",
+  "app.login.subheader": "Log in now to start trading!",
+  "app.login.forgot": "Forgot password",
+  "app.login.submit-button": "Login",
+  "app.login.sign-up-message": "New to SATAEX?",
+  "app.login.sign-up-link": "Sign up"
 }
