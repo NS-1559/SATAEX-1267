@@ -1,6 +1,6 @@
 import { InputAdornment, TextField } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
-import { Eye } from 'react-feather';
+import { Eye, EyeOff } from 'react-feather';
 
 interface PrivateTextFieldProps {
   error?: string;
@@ -36,7 +36,9 @@ const PrivateTextField: FC<PrivateTextFieldProps> = ({
             sx={{ userSelect: 'none', cursor: 'pointer', ml: 3 }}
             position="start"
           >
-            <Eye onClick={toggleType} />
+            <span onClick={toggleType}>
+              {type === 'text' ? <EyeOff /> : <Eye />}
+            </span>
           </InputAdornment>
         ),
       }}

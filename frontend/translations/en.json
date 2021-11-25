@@ -44,6 +44,8 @@
   "app.auth.required": "Bot be empty",
   "app.auth.invalid-email": "Invalid email",
   "app.auth.invalid-password": "Minimum 8 characters, including letters and numbers",
+  "app.auth.rewards-widget-label": "Refer, Earn, Repeat",
+  "app.auth.rewards-widget-description": "A $20 bonus in USDT and unlimited number of reward cards await when you refer friends.",
 
   "app.login.title": "Login",
   "app.login.header": "Welcome to SATAEX",

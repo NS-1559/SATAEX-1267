@@ -1,6 +1,7 @@
 import DefaultLayout from '@components/layouts/DefaultLayout';
 import { wrapper } from '@features/index';
 import { ThemeProvider } from '@mui/material/styles';
+import '@styles/global.css';
 import theme from '@themes/default';
 import { AppProps } from 'next/app';
 import { FC } from 'react';

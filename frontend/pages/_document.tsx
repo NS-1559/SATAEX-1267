@@ -1,10 +1,10 @@
 import createEmotionServer from '@emotion/server/create-instance';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ServerStyleSheets } from '@mui/styles';
 import theme from '@themes/default';
 import createEmotionCache from '@utils/emotionCache';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { Children } from 'react';
-import { ServerStyleSheets } from '@mui/styles';
 
 const sheets = new ServerStyleSheets();
 const cssString = sheets.toString();

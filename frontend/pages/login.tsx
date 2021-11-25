@@ -1,8 +1,17 @@
 import { useTranslate } from '@app/hooks/translate';
 import Seo from '@components/common/Seo';
+import AuthWidgetCard from '@components/pages/auth/AuthWidgetCard';
 import LoginForm from '@components/pages/auth/LoginForm';
 import { Box, Container } from '@mui/material';
 import { NextPage } from 'next';
+
+const widgets = [
+  {
+    label: 'app.auth.rewards-widget-label',
+    description: 'app.auth.rewards-widget-description',
+    icon: '/images/widgets/rewards.svg',
+  },
+];
 
 const LoginPage: NextPage = () => {
   const { t } = useTranslate();
@@ -29,6 +38,25 @@ const LoginPage: NextPage = () => {
             }}
           >
             <LoginForm />
+          </Box>
+          <Box
+            sx={{
+              width: '50%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {widgets.map((widget) => (
+              <Box key={widget.label} my={2}>
+                <AuthWidgetCard
+                  label={t(widget.label)}
+                  description={t(widget.description)}
+                  icon={widget.icon}
+                />
+              </Box>
+            ))}
           </Box>
         </Box>
       </Container>
