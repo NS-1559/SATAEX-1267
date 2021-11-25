@@ -39,13 +39,21 @@
 
   "app.auth.email": "Email",
   "app.auth.password": "Password",
+  "app.auth.confirm-password": "Confirm password",
   "app.auth.first-name": "First name",
   "app.auth.last-name": "Last name",
-  "app.auth.required": "Bot be empty",
+  "app.auth.required": "Not be empty",
   "app.auth.invalid-email": "Invalid email",
   "app.auth.invalid-password": "Minimum 8 characters, including letters and numbers",
+  "app.auth.passwords-not-match": "Passwords do not match",
   "app.auth.rewards-widget-label": "Refer, Earn, Repeat",
   "app.auth.rewards-widget-description": "A $20 bonus in USDT and unlimited number of reward cards await when you refer friends.",
+  "app.auth.robust-widget-label": "Smart, Intuitive Trading Platform",
+  "app.auth.robust-widget-description": "Get real-time market data and competitive market depth and liquidity.",
+  "app.auth.security-widget-label": "Security You Can Count On",
+  "app.auth.security-widget-description": "We keep your assets securely stored offline for maximum protection.",
+  "app.auth.chat-widget-label": "We're Here for You",
+  "app.auth.chat-widget-description": "24/7 multilingual support means you'll always get answers to your questions.",
 
   "app.login.title": "Login",
   "app.login.header": "Welcome to SATAEX",
@@ -53,5 +61,13 @@
   "app.login.forgot": "Forgot password",
   "app.login.submit-button": "Login",
   "app.login.sign-up-message": "New to SATAEX?",
-  "app.login.sign-up-link": "Sign up"
+  "app.login.sign-up-link": "Sign up",
+
+  "app.sign-up.title": "Sign up",
+  "app.sign-up.header": "Welcome to SATAEX",
+  "app.sign-up.subheader": "Setting up an account takes less than 1 minute.",
+  "app.sign-up.submit-button": "Sign up",
+  "app.sign-up.checkbox-message": "I have read and agree to SATAEX's Terms of Service and Privacy Policy.",
+  "app.sign-up.login-message": "Already have an account?",
+  "app.sign-up.login-link": "Login"
 }

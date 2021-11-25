@@ -130,7 +130,7 @@ const Header: FC = () => {
             </Typography>
           </Link>
           <Link
-            href="/login"
+            href="/sign-up"
             className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonPrimary}`}
           >
             <Typography className={classes.actionButtonText}>
