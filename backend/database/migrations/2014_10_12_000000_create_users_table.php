@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name', 20);
             $table->string('last_name', 20);
             $table->string('address', 1000);
-            $table->string('phone_number', 12);
+            $table->string('phone_number', 18);
         });
     }
 

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,7 +18,9 @@ class User extends Authenticatable
      * @var string[]
      */
     public $timestamps = false;
+    public $incrementing = false;
     protected $keyType = 'string';
+
 
     protected $fillable = [
         'name',

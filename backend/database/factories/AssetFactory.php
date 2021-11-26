@@ -15,7 +15,7 @@ class AssetFactory extends Factory
     {
         return [
             'contract' => $this->faker->sha256(),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->word(),
             'uri' => $this->faker->imageUrl(640, 480, 'animals'),
             'price' => $this->faker->randomFloat(),
             'type' => $this->faker->randomElement(['BSC', 'TRC20']),

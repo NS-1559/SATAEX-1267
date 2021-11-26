@@ -20,7 +20,8 @@ class IdentityFactory extends Factory
             'email' => $this->faker->email(),
             'password' => bcrypt($this->faker->password()),
             'role' => 'USER',
-            'two_fa_key' => $this->faker->sha256(),
+            'two_fa_key' => '',
+            // 'two_fa_key' => $this->faker->sha256(),
             'created_at' => now(),
         ];
     }

@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'address' => $this->faker->address(),
-            'phone_number' => $this->faker->e164PhoneNumber()
+            'phone_number' => $this->faker->phoneNumber(),
         ];
     }
 }
