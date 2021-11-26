@@ -35,5 +35,39 @@
   "app.footer.terms-of-service": "Đièu khoản dịch vụ",
   "app.footer.privacy-terms": "Quyền riêng tư",
 
-  "app.home.title": "Sàn giao dịch tiền điện tử"
+  "app.home.title": "Sàn giao dịch tiền điện tử",
+
+  "app.auth.email": "Email",
+  "app.auth.password": "Mật khẩu",
+  "app.auth.confirm-password": "Xác nhận mật khẩu",
+  "app.auth.first-name": "Tên",
+  "app.auth.last-name": "Họ",
+  "app.auth.required": "Không được để trống",
+  "app.auth.invalid-email": "Email không hợp lệ",
+  "app.auth.invalid-password": "Tối thiểu 8 ký tự, bao gồm chữ cái và số",
+  "app.auth.passwords-not-match": "Các mật khẩu không khớp",
+  "app.auth.rewards-widget-label": "Giới thiệu, Kiếm tiền, Lặp lại",
+  "app.auth.rewards-widget-description": "Phần thưởng $20 bằng USDT và số lượng thẻ thưởng không giới hạn đang chờ bạn khi giới thiệu bạn bè.",
+  "app.auth.robust-widget-label": "Nền tảng giao dịch thông minh, trực quan",
+  "app.auth.robust-widget-description": "Nhận dữ liệu thị trường, độ sâu và tính thanh khoản của thị trường cạnh tranh theo thời gian thực.",
+  "app.auth.security-widget-label": "Bảo mật bạn có thể tin tưởng",
+  "app.auth.security-widget-description": "Chúng tôi giữ tài sản của bạn được lưu trữ ngoại tuyến một cách an toàn để bảo vệ tối đa.",
+  "app.auth.chat-widget-label": "Chúng tôi ở đây vì bạn",
+  "app.auth.chat-widget-description": "Hỗ trợ đa ngôn ngữ 24/7 có nghĩa là bạn sẽ luôn nhận được câu trả lời cho các câu hỏi của mình.",
+
+  "app.login.title": "Đăng nhập",
+  "app.login.header": "Chào mừng đến với SATAEX",
+  "app.login.subheader": "Đăng nhập ngay bây giờ để bắt đầu giao dịch!",
+  "app.login.forgot": "Quên mật khẩu",
+  "app.login.submit-button": "Đăng nhập",
+  "app.login.sign-up-message": "Không có tài khoản?",
+  "app.login.sign-up-link": "Đăng ký tại đây!",
+
+  "app.sign-up.title": "Đăng ký",
+  "app.sign-up.header": "Chào mừng đến với SATAEX",
+  "app.sign-up.subheader": "Thiết lập tài khoản chỉ mất chưa đầy 1 phút.",
+  "app.sign-up.submit-button": "Đăng ký",
+  "app.sign-up.checkbox-message": "Tôi đồng ý với điều khoản và chính sách của SATAEX.",
+  "app.sign-up.login-message": "Bạn đã có tài khoản?",
+  "app.sign-up.login-link": "Đăng nhập ngay"
 }
