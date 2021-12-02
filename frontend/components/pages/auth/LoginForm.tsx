@@ -1,4 +1,6 @@
+import { useAppDispatch } from '@app/hooks/redux';
 import { useTranslate } from '@app/hooks/translate';
+import { loginThunk } from '@app/store/auth/sliceThunks';
 import Link from '@components/common/Link';
 import { PASSWORD_REGEX } from '@constants/regex';
 import { Box, Button, Typography } from '@mui/material';
@@ -15,6 +17,7 @@ interface FormValue {
 
 const LoginForm: FC = () => {
   const { t } = useTranslate();
+  const dispatch = useAppDispatch();
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -31,7 +34,7 @@ const LoginForm: FC = () => {
     initialValues: { email: '', password: '' },
     validationSchema,
     onSubmit: (formValues) => {
-      console.log(formValues);
+      dispatch(loginThunk(formValues));
     },
   });
 
