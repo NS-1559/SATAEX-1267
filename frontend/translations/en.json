@@ -69,5 +69,9 @@
   "app.sign-up.submit-button": "Sign up",
   "app.sign-up.checkbox-message": "I have read and agree to SATAEX's Terms of Service and Privacy Policy.",
   "app.sign-up.login-message": "Already have an account?",
-  "app.sign-up.login-link": "Login"
+  "app.sign-up.login-link": "Login",
+
+  "app.home.header-title": "Next level trading",
+  "app.home.header-description": "We've made it easier to buy, sell, trade, and earn with cryptocurrencies.",
+  "app.home.header-sign-up-button": "Sign up now"
 }
