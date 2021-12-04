@@ -4,5 +4,5 @@ export interface LoginParams {
 }
 
 export interface LoginResponse {
-  access_token: string;
+  accessToken: string;
 }

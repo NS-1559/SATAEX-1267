@@ -73,5 +73,13 @@
 
   "app.home.header-title": "Next level trading",
   "app.home.header-description": "We've made it easier to buy, sell, trade, and earn with cryptocurrencies.",
-  "app.home.header-sign-up-button": "Sign up now"
+  "app.home.header-sign-up-button": "Sign up now",
+  "app.home.market-trends-title": "Market Trends",
+  "app.home.market-trends-name": "Name",
+  "app.home.market-trends-price": "Price",
+  "app.home.market-trends-24h-change": "24H Change",
+  "app.home.market-trends-24h-volume": "24H Volume(USD)",
+  "app.home.market-trends-chart": "Chart",
+  "app.home.market-trends-trade-button": "Trade",
+  "app.home.market-trends-view-more-button": "View more"
 }

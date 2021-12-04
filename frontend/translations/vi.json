@@ -69,5 +69,17 @@
   "app.sign-up.submit-button": "Đăng ký",
   "app.sign-up.checkbox-message": "Tôi đồng ý với điều khoản và chính sách của SATAEX.",
   "app.sign-up.login-message": "Bạn đã có tài khoản?",
-  "app.sign-up.login-link": "Đăng nhập ngay"
+  "app.sign-up.login-link": "Đăng nhập ngay",
+
+  "app.home.header-title": "Next level trading",
+  "app.home.header-description": "Chúng tôi đã thiết kế sàn để bạn có thể mua, bán, giao dịch và kiếm tiền dễ dàng hơn bằng tiền điện tử.",
+  "app.home.header-sign-up-button": "Đăng ký ngay",
+  "app.home.market-trends-title": "Xu hướng thị trường",
+  "app.home.market-trends-name": "Tên",
+  "app.home.market-trends-price": "Giá",
+  "app.home.market-trends-24h-change": "Thay đổi 24h",
+  "app.home.market-trends-24h-volume": "Khối lượng 24h(USD)",
+  "app.home.market-trends-chart": "Biểu đồ",
+  "app.home.market-trends-trade-button": "Giao dịch",
+  "app.home.market-trends-view-more-button": "Xem thêm"
 }
