@@ -3,6 +3,7 @@ import HomeHeader from '@components/pages/home/HomeHeader';
 import MarketTrends from '@components/pages/home/MarketTrends';
 import { NextPage } from 'next';
 import TradeReason from '@components/pages/home/TradeReason';
+import TradeBanner from '@components/pages/home/TradeBanner';
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
       <HomeHeader />
       <MarketTrends />
       <TradeReason />
+      <TradeBanner />
     </>
   );
 };

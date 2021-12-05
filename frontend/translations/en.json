@@ -81,5 +81,14 @@
   "app.home.market-trends-24h-volume": "24H Volume(USD)",
   "app.home.market-trends-chart": "Chart",
   "app.home.market-trends-trade-button": "Trade",
-  "app.home.market-trends-view-more-button": "View more"
+  "app.home.market-trends-view-more-button": "View more",
+  "app.home.trade-reason-title": "Here are a few reasons why you should trade with us",
+  "app.home.trade-reason-1-label": "Smart, intuitive crypto trading platform",
+  "app.home.trade-reason-1-content": "Get real-time market data and a competitive market liquidity to stay ahead.",
+  "app.home.trade-reason-2-label": "A crypto platform you can count on",
+  "app.home.trade-reason-2-content": "Trade worry-free with our 99.9% availability track record even through volatile market periods.",
+  "app.home.trade-reason-3-label": "Round the clock support",
+  "app.home.trade-reason-3-content": "24/7 multilingual support means you’ll get answers every time, all the time.",
+  "app.home.trade-banner-title": "Trade cryptocurrencies on the go",
+  "app.home.trade-banner-description": "Take the dependable SATAEX experience with you and trade whenever, wherever."
 }
