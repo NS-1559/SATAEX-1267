@@ -3,13 +3,13 @@ import { grey } from '@mui/material/colors';
 import Image from 'next/image';
 import { FC } from 'react';
 
-interface AuthWidgetCardProps {
+interface WidgetCardProps {
   label: string;
   description: string;
   icon: string;
 }
 
-const AuthWidgetCard: FC<AuthWidgetCardProps> = ({
+const WidgetCard: FC<WidgetCardProps> = ({
   label,
   description,
   icon,
@@ -20,7 +20,7 @@ const AuthWidgetCard: FC<AuthWidgetCardProps> = ({
       sx={{
         display: 'flex',
         background: grey['100'],
-        width: '370px',
+        width: '100%',
         p: 2,
         pr: 3,
       }}
@@ -40,4 +40,4 @@ const AuthWidgetCard: FC<AuthWidgetCardProps> = ({
   );
 };
 
-export default AuthWidgetCard;
+export default WidgetCard;

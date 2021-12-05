@@ -1,6 +1,6 @@
 import { useTranslate } from '@app/hooks/translate';
 import Seo from '@components/common/Seo';
-import AuthWidgetCard from '@components/pages/auth/AuthWidgetCard';
+import WidgetCard from '@components/common/WidgetCard';
 import LoginForm from '@components/pages/auth/LoginForm';
 import { Box, Container } from '@mui/material';
 import { NextPage } from 'next';
@@ -49,8 +49,8 @@ const LoginPage: NextPage = () => {
             }}
           >
             {widgets.map((widget) => (
-              <Box key={widget.label} my={2}>
-                <AuthWidgetCard
+              <Box key={widget.label} my={2} sx={{ width: '370px' }}>
+                <WidgetCard
                   label={t(widget.label)}
                   description={t(widget.description)}
                   icon={widget.icon}

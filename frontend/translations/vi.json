@@ -81,5 +81,12 @@
   "app.home.market-trends-24h-volume": "Khối lượng 24h(USD)",
   "app.home.market-trends-chart": "Biểu đồ",
   "app.home.market-trends-trade-button": "Giao dịch",
-  "app.home.market-trends-view-more-button": "Xem thêm"
+  "app.home.market-trends-view-more-button": "Xem thêm",
+  "app.home.trade-reason-title": "Đây là một số lý do tại sao bạn nên giao dịch với chúng tôi",
+  "app.home.trade-reason-1-label": "Nền tảng giao dịch tiền điện tử thông minh, trực quan",
+  "app.home.trade-reason-1-content": "Nhận dữ liệu thị trường theo thời gian thực và thanh khoản thị trường cạnh tranh để luôn dẫn đầu.",
+  "app.home.trade-reason-2-label": "Sàn giao dịch tiền điện tử đáng tin cậy",
+  "app.home.trade-reason-2-content": "Giao dịch không phải lo lắng với lịch sử thành tích về khả năng hoạt động 99,9% của chúng tôi ngay cả trong các giai đoạn thị trường biến động.",
+  "app.home.trade-reason-3-label": "Hỗ trợ cả ngày lẫn đêm",
+  "app.home.trade-reason-3-content": "Hỗ trợ đa ngôn ngữ 24/7, bạn sẽ được giải đáp mọi lúc, mọi nơi."
 }
