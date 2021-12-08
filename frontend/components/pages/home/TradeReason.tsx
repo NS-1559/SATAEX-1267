@@ -26,7 +26,7 @@ const TradeReason: FC = () => {
 
   return (
     <Container sx={{ width: '100%', my: 5 }}>
-      <Typography variant="h4" sx={{ fontWeight: 'medium', mb: 4 }}>
+      <Typography variant="h4" sx={{ fontWeight: 'medium', mb: 6 }}>
         {t('app.home.trade-reason-title')}
       </Typography>
       <Grid container spacing={2} sx={{ width: '100%', display: 'flex' }}>
