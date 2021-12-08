@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 import { loginThunk } from './sliceThunks';
+import { TokenPayload } from '@models/Auth';
 
 interface AuthState {
   login: {
@@ -29,11 +30,12 @@ const authSlice = createSlice({
     builder.addCase(
       loginThunk.fulfilled,
       (state, action: PayloadAction<string>) => {
-        cookies.set('token', action.payload);
+        const payload = jwtDecode(action.payload) as TokenPayload;
+        const exp = payload.exp / 86400;
+        cookies.set('token', action.payload, {
+          expires: exp,
+        });
         state.login.loading = false;
-        const payload = jwtDecode(action.payload);
-        console.log(payload);
-        state.login.user = payload as User;
       },
     );
     builder.addCase(loginThunk.rejected, (state) => {
