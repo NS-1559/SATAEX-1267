@@ -163,7 +163,7 @@ const SignUpForm: FC = () => {
         >
           {t('app.sign-up.sign-up-message')}
         </Typography>
-        <Link href="/sign-up">
+        <Link href="/auth/sign-up">
           <Typography
             variant="subtitle1"
             color="primary"
@@ -181,7 +181,7 @@ const SignUpForm: FC = () => {
         >
           {t('app.sign-up.login-message')}
         </Typography>
-        <Link href="/login">
+        <Link href="/auth/login">
           <Typography
             variant="subtitle1"
             color="primary"

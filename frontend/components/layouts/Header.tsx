@@ -122,7 +122,7 @@ const Header: FC = () => {
         </Box>
         <Box sx={{ display: 'flex' }}>
           <Link
-            href="/login"
+            href="/auth/login"
             className={`${classes.navLink} ${classes.actionButton}`}
           >
             <Typography className={classes.actionButtonText}>
@@ -130,7 +130,7 @@ const Header: FC = () => {
             </Typography>
           </Link>
           <Link
-            href="/sign-up"
+            href="/auth/sign-up"
             className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonPrimary}`}
           >
             <Typography className={classes.actionButtonText}>

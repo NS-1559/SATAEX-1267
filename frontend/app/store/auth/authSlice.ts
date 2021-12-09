@@ -9,13 +9,21 @@ interface AuthState {
   login: {
     loading: boolean;
     user: User | null;
+    isLogin: boolean;
+  };
+  register: {
+    loading: boolean;
   };
 }
 
 const initialState: AuthState = {
   login: {
     loading: false,
+    isLogin: false,
     user: null,
+  },
+  register: {
+    loading: false,
   },
 };
 
@@ -36,6 +44,7 @@ const authSlice = createSlice({
           expires: exp,
         });
         state.login.loading = false;
+        state.login.isLogin = true;
       },
     );
     builder.addCase(loginThunk.rejected, (state) => {

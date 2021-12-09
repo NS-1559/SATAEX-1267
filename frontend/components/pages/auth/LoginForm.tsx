@@ -71,13 +71,13 @@ const LoginForm: FC = () => {
         />
       </Box>
       <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
-        <Link href="/forgot-password">
+        <Link href="/auth/forgot-password">
           <Typography
             variant="subtitle1"
             sx={{ fontWeight: 'medium', width: 'fit-content' }}
             color="primary"
           >
-            {t('app.login.forgot')}
+            {t('app.auth.forgot')}
           </Typography>
         </Link>
       </Box>
@@ -94,7 +94,7 @@ const LoginForm: FC = () => {
         >
           {t('app.login.sign-up-message')}
         </Typography>
-        <Link href="/sign-up">
+        <Link href="/auth/sign-up">
           <Typography
             variant="subtitle1"
             color="primary"
