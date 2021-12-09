@@ -36,7 +36,7 @@ const HomeHeader: FC = () => {
         >
           {t('app.home.header-description')}
         </Typography>
-        <Link href="/sign-up">
+        <Link href="/auth/sign-up">
           <Button variant="contained" size="large">
             {t('app.home.header-sign-up-button')}
           </Button>

@@ -37,7 +37,7 @@ const LoginForm: FC = () => {
     if (loginState.isLogin) {
       dispatch(push('/'));
     }
-  }, []);
+  }, [dispatch, loginState.isLogin]);
 
   const validationSchema = yup.object().shape({
     email: yup

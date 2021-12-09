@@ -23,11 +23,7 @@ app.use("/*", async (req, res) => {
     : (requestConfigs.headers = {});
 
   try {
-    const response = await axios({
-      method: "POST",
-      url: "http://localhost:8000/api/auth/login",
-      data: { email: "user@gmail.com", password: "User1234" },
-    });
+    const response = await axios(requestConfigs);
     res.set(response.headers);
     return res.status(response.status).send(response.data);
   } catch (err) {

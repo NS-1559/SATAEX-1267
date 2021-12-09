@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="277ce3ef-c18c-4b32-af05-061533995abd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/store/auth/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/auth/authSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/store/common/commonSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/common/commonSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/DefaultLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/pages/auth/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/pages/auth/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/vi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sataex-1267.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/../sataex-1267.code-workspace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/configs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/configs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +54,7 @@
       <workItem from="1638707688725" duration="3576000" />
       <workItem from="1638929333270" duration="4057000" />
       <workItem from="1638972115994" duration="1422000" />
-      <workItem from="1639023052258" duration="5229000" />
+      <workItem from="1639023052258" duration="6252000" />
     </task>
     <servers />
   </component>

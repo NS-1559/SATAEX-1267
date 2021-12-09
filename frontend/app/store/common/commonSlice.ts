@@ -46,7 +46,6 @@ const commonSlice = createSlice({
     },
     closeToast(state) {
       state.toast.open = false;
-      state.toast.message = '';
     },
   },
   extraReducers: (builder) => {
