@@ -54,6 +54,7 @@
   "app.auth.security-widget-description": "We keep your assets securely stored offline for maximum protection.",
   "app.auth.chat-widget-label": "We're Here for You",
   "app.auth.chat-widget-description": "24/7 multilingual support means you'll always get answers to your questions.",
+  "app.auth.loading": "Loading...",
 
   "app.login.title": "Login",
   "app.login.header": "Welcome to SATAEX",
@@ -62,6 +63,7 @@
   "app.login.submit-button": "Login",
   "app.login.sign-up-message": "New to SATAEX?",
   "app.login.sign-up-link": "Sign up",
+  "app.login.fail-message": "Email or password is incorrect",
 
   "app.sign-up.title": "Sign up",
   "app.sign-up.header": "Welcome to SATAEX",

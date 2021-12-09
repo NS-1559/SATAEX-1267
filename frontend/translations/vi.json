@@ -54,6 +54,7 @@
   "app.auth.security-widget-description": "Chúng tôi giữ tài sản của bạn được lưu trữ ngoại tuyến một cách an toàn để bảo vệ tối đa.",
   "app.auth.chat-widget-label": "Chúng tôi ở đây vì bạn",
   "app.auth.chat-widget-description": "Hỗ trợ đa ngôn ngữ 24/7 có nghĩa là bạn sẽ luôn nhận được câu trả lời cho các câu hỏi của mình.",
+  "app.auth.loading": "Đang tải...",
 
   "app.login.title": "Đăng nhập",
   "app.login.header": "Chào mừng đến với SATAEX",
@@ -62,6 +63,7 @@
   "app.login.submit-button": "Đăng nhập",
   "app.login.sign-up-message": "Không có tài khoản?",
   "app.login.sign-up-link": "Đăng ký tại đây!",
+  "app.login.fail-message": "Email hoặc mật khẩu không chính xác",
 
   "app.sign-up.title": "Đăng ký",
   "app.sign-up.header": "Chào mừng đến với SATAEX",

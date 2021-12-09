@@ -9,6 +9,7 @@ interface AuthState {
   login: {
     loading: boolean;
     user: User | null;
+    error: boolean;
     isLogin: boolean;
   };
   register: {
@@ -20,6 +21,7 @@ const initialState: AuthState = {
   login: {
     loading: false,
     isLogin: false,
+    error: false,
     user: null,
   },
   register: {
@@ -34,6 +36,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loginThunk.pending, (state) => {
       state.login.loading = true;
+      state.login.error = false;
     });
     builder.addCase(
       loginThunk.fulfilled,
@@ -49,6 +52,7 @@ const authSlice = createSlice({
     );
     builder.addCase(loginThunk.rejected, (state) => {
       state.login.loading = false;
+      state.login.error = true;
     });
   },
 });

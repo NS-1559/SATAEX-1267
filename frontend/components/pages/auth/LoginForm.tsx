@@ -1,14 +1,16 @@
-import { useAppDispatch } from '@app/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
 import { useTranslate } from '@app/hooks/translate';
 import { loginThunk } from '@app/store/auth/sliceThunks';
 import Link from '@components/common/Link';
 import { PASSWORD_REGEX } from '@constants/regex';
 import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import * as yup from 'yup';
 import PrivateTextField from './PrivateTextField';
 import PubicTextField from './PubicTextField';
+import { commonActions } from '@app/store/common/commonSlice';
+import { push } from 'connected-next-router';
 
 interface FormValue {
   email: string;
@@ -18,6 +20,24 @@ interface FormValue {
 const LoginForm: FC = () => {
   const { t } = useTranslate();
   const dispatch = useAppDispatch();
+  const loginState = useAppSelector((state) => state.auth.login);
+
+  useEffect(() => {
+    if (loginState.error) {
+      dispatch(
+        commonActions.openToast({
+          message: t('app.login.fail-message'),
+          type: 'error',
+        }),
+      );
+    }
+  }, [dispatch, loginState.error, t]);
+
+  useEffect(() => {
+    if (loginState.isLogin) {
+      dispatch(push('/'));
+    }
+  }, []);
 
   const validationSchema = yup.object().shape({
     email: yup
@@ -82,8 +102,16 @@ const LoginForm: FC = () => {
         </Link>
       </Box>
       <Box mb={4}>
-        <Button type="submit" variant="contained" size="large" fullWidth>
-          {t('app.login.submit-button')}
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          fullWidth
+          disabled={loginState.loading}
+        >
+          {!loginState.loading
+            ? t('app.login.submit-button')
+            : t('app.auth.loading')}
         </Button>
       </Box>
       <Box sx={{ display: 'flex' }}>
