@@ -9,11 +9,7 @@ interface WidgetCardProps {
   icon: string;
 }
 
-const WidgetCard: FC<WidgetCardProps> = ({
-  label,
-  description,
-  icon,
-}) => {
+const WidgetCard: FC<WidgetCardProps> = ({ label, description, icon }) => {
   return (
     <Paper
       elevation={0}

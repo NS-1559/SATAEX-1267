@@ -77,13 +77,6 @@
   "app.home.header-description": "Chúng tôi đã thiết kế sàn để bạn có thể mua, bán, giao dịch và kiếm tiền dễ dàng hơn bằng tiền điện tử.",
   "app.home.header-sign-up-button": "Đăng ký ngay",
   "app.home.market-trends-title": "Xu hướng thị trường",
-  "app.home.market-trends-name": "Tên",
-  "app.home.market-trends-price": "Giá",
-  "app.home.market-trends-24h-change": "Thay đổi 24h",
-  "app.home.market-trends-24h-volume": "Khối lượng 24h(USD)",
-  "app.home.market-trends-chart": "Biểu đồ",
-  "app.home.market-trends-trade-button": "Giao dịch",
-  "app.home.market-trends-view-more-button": "Xem thêm",
   "app.home.trade-reason-title": "Đây là một số lý do tại sao bạn nên giao dịch với chúng tôi",
   "app.home.trade-reason-1-label": "Nền tảng giao dịch tiền điện tử thông minh, trực quan",
   "app.home.trade-reason-1-content": "Nhận dữ liệu thị trường theo thời gian thực và thanh khoản thị trường cạnh tranh để luôn dẫn đầu.",
@@ -94,5 +87,15 @@
   "app.home.trade-banner-title": "Giao dịch tiền điện tử mọi lúc, mọi nơi",
   "app.home.trade-banner-description": "Mang đến cho bạn trải nghiệm SATAEX đáng tin cậy và giao dịch mọi lúc, mọi nơi.",
   "app.home.footer-trade-now": "Giao dịch ngay bây giờ",
-  "app.home.footer-get-started": "Bắt đầu"
+  "app.home.footer-get-started": "Bắt đầu",
+
+  "app.markets.title": "Thị trường",
+  "app.markets.search": "Tìm kiếm",
+  "app.markets.name": "Tên",
+  "app.markets.price": "Giá",
+  "app.markets.24h-change": "Thay đổi 24h",
+  "app.markets.24h-volume": "Khối lượng 24h(USD)",
+  "app.markets.chart": "Biểu đồ",
+  "app.markets.trade-button": "Giao dịch",
+  "app.markets.view-more-button": "Xem thêm"
 }

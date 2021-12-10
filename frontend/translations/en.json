@@ -77,13 +77,6 @@
   "app.home.header-description": "We've made it easier to buy, sell, trade, and earn with cryptocurrencies.",
   "app.home.header-sign-up-button": "Sign up now",
   "app.home.market-trends-title": "Market Trends",
-  "app.home.market-trends-name": "Name",
-  "app.home.market-trends-price": "Price",
-  "app.home.market-trends-24h-change": "24H Change",
-  "app.home.market-trends-24h-volume": "24H Volume(USD)",
-  "app.home.market-trends-chart": "Chart",
-  "app.home.market-trends-trade-button": "Trade",
-  "app.home.market-trends-view-more-button": "View more",
   "app.home.trade-reason-title": "Here are a few reasons why you should trade with us",
   "app.home.trade-reason-1-label": "Smart, intuitive crypto trading platform",
   "app.home.trade-reason-1-content": "Get real-time market data and a competitive market liquidity to stay ahead.",
@@ -94,5 +87,15 @@
   "app.home.trade-banner-title": "Trade cryptocurrencies on the go",
   "app.home.trade-banner-description": "Take the dependable SATAEX experience with you and trade whenever, wherever.",
   "app.home.footer-trade-now": "Start Trading Now",
-  "app.home.footer-get-started": "Get Started"
+  "app.home.footer-get-started": "Get Started",
+
+  "app.markets.title": "Markets",
+  "app.markets.search": "Search",
+  "app.markets.name": "Name",
+  "app.markets.price": "Price",
+  "app.markets.24h-change": "24H Change",
+  "app.markets.24h-volume": "24H Volume(USD)",
+  "app.markets.chart": "Chart",
+  "app.markets.trade-button": "Trade",
+  "app.markets.view-more-button": "View more"
 }

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import WidgetCard from '@components/common/WidgetCard';
 import { useTranslate } from '@app/hooks/translate';
 

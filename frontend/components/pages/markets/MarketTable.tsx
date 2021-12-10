@@ -1,9 +1,9 @@
-import { useTranslate } from '@app/hooks/translate';
-import Link from '@components/common/Link';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import {
   Box,
   Button,
   Container,
+  InputAdornment,
   Paper,
   Table,
   TableBody,
@@ -11,31 +11,72 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Toolbar,
+  TextField,
   Typography,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import Image from 'next/image';
-import { FC } from 'react';
-import { ArrowRight } from 'react-feather';
-import { useAppSelector } from '@app/hooks/redux';
-import { formatChartUrl } from '@utils/chart';
 import {
   formatNumberWithSuffix,
   formatPrice,
   formatPriceChange,
 } from '@utils/price';
+import { formatChartUrl } from '@utils/chart';
+import { useTranslate } from '@app/hooks/translate';
+import { useTheme } from '@mui/material/styles';
+import { useAppSelector } from '@app/hooks/redux';
+import { Search } from 'react-feather';
+import { Coin } from '@models/Coin';
 
-const MarketTrends: FC = () => {
+const MarketTable: FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const topCoins = useAppSelector((state) => {
-    return state.common.coins.data.slice(0, 10);
+  const tokens = useAppSelector((state) => {
+    return state.common.coins.data;
   });
+  const topTokens = tokens.slice(0, 50);
+  const [displayTokens, setDisplayTokens] = useState(topTokens);
+
+  const onKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const keyword = e.target.value.toLowerCase();
+    if (keyword) {
+      setDisplayTokens(
+        tokens.filter(
+          (item: Coin) =>
+            item.name.toLowerCase().includes(keyword) ||
+            item.symbol.toLowerCase().includes(keyword),
+        ),
+      );
+    } else setDisplayTokens(topTokens);
+  };
 
   return (
     <Box sx={{ width: '100%', py: 8 }}>
       <Container>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 5,
+          }}
+        >
+          <Typography variant="h4" sx={{ fontWeight: 'medium' }}>
+            {t('app.markets.title')}
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder={t('app.markets.search')}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search size={20} />
+                </InputAdornment>
+              ),
+            }}
+            onChange={onKeywordChange}
+          />
+        </Box>
         <Paper
           elevation={0}
           sx={{
@@ -44,19 +85,6 @@ const MarketTrends: FC = () => {
             borderColor: theme.palette.grey[300],
           }}
         >
-          <Toolbar
-            sx={{
-              borderBottom: '1px solid',
-              borderColor: theme.palette.grey[300],
-            }}
-          >
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: 'medium', pl: 7, py: 4 }}
-            >
-              {t('app.home.market-trends-title')}
-            </Typography>
-          </Toolbar>
           <TableContainer component={Box}>
             <Table aria-label="market-trends">
               <TableHead>
@@ -78,7 +106,7 @@ const MarketTrends: FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {topCoins.map((coin, index) => (
+                {displayTokens.map((coin, index) => (
                   <TableRow
                     key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -152,38 +180,10 @@ const MarketTrends: FC = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Toolbar
-            sx={{
-              borderTop: '1px solid',
-              borderColor: theme.palette.grey[300],
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Link href="/markets">
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'text.primary',
-                  '&:hover': { color: 'primary.main' },
-                  transition: 'color 0.2s ease-in-out',
-                }}
-              >
-                <Typography
-                  variant="subtitle1"
-                  sx={{ fontWeight: 'normal', mr: 1 }}
-                >
-                  {t('app.markets.view-more-button')}
-                </Typography>
-                <ArrowRight size={20} />
-              </Box>
-            </Link>
-          </Toolbar>
         </Paper>
       </Container>
     </Box>
   );
 };
 
-export default MarketTrends;
+export default MarketTable;
