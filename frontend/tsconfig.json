@@ -30,5 +30,10 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+
+  "lib": ["es6", "dom"],
+  "noImplicitAny": true,
+  "noImplicitThis": true,
+  "strictNullChecks": true
 }
