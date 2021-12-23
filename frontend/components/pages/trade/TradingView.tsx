@@ -1,33 +1,22 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import { FC } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
-import {
-  Box,
-  Button,
-  Container,
-  FormLabel,
-  Input,
-  InputAdornment,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '@app/hooks/redux';
 
-import { useTranslate } from '@app/hooks/translate';
-import { useTheme } from '@mui/material/styles';
-
-const filter = createFilterOptions();
+const tokenList = [
+  { label: 'BTC/USDT', value: 'BTCUSDT' },
+  { label: 'ETH/USDT', value: 'ETHUSDT' },
+  { label: 'BNB/USDT', value: 'BNBUSDT' },
+  { label: 'DOT/USDT', value: 'DOTUSDT' },
+  { label: 'ADA/USDT', value: 'ADAUSDT' },
+];
 
 const TradingView: FC = () => {
-  const { t } = useTranslate();
-  const theme = useTheme();
-  const [value, setValue] = useState('BTCUSDT');
+  const router = useRouter();
+  const tradePair = useAppSelector((state) => state.trade.tradePair);
+  console.log(tradePair);
 
   return (
     <Box sx={{ width: '100%', py: 8 }}>
@@ -41,7 +30,7 @@ const TradingView: FC = () => {
           }}
         >
           <FormLabel sx={{ fontWeight: 'bold', fontSize: 20 }}>
-            {value}
+            {tradePair}
           </FormLabel>
           <Autocomplete
             id="combo-box-demo"
@@ -49,7 +38,9 @@ const TradingView: FC = () => {
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, token) => {
-              setValue(token?.value || 'BTCUSDT');
+              console.log(token);
+              const value = token?.value || 'BTCUSDT';
+              router.push(`/trade/${value}`);
             }}
           />
         </Box>
@@ -57,21 +48,13 @@ const TradingView: FC = () => {
           theme="dark"
           height={610}
           width={'100%'}
-          symbol={value}
+          symbol={tradePair}
           allow_symbol_change={false}
           container_id="tradingview_28afa"
-        ></AdvancedRealTimeChart>
+        />
       </Container>
     </Box>
   );
 };
-
-const tokenList = [
-  { label: 'BTC/USDT', value: 'BTCUSDT' },
-  { label: 'ETH/USDT', value: 'ETHUSDT' },
-  { label: 'BNB/USDT', value: 'BNBUSDT' },
-  { label: 'DOT/USDT', value: 'DOTUSDT' },
-  { label: 'ADA/USDT', value: 'ADAUSDT' },
-];
 
 export default TradingView;

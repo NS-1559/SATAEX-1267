@@ -4,13 +4,18 @@ import TradingView from '@components/pages/trade/TradingView';
 import OrderBooks from '@components/pages/trade/OrderBooks';
 import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
-import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@app/hooks/redux';
+import { tradeActions } from '@app/store/trade/tradeSlice';
 
 const Markets: NextPage = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslate();
+  const { query } = useRouter();
 
-  const { trade } = useRouter().query;
-  console.log(trade);
+  useEffect(() => {
+    dispatch(tradeActions.setTradePair(query.trade as string));
+  }, [query, dispatch]);
 
   return (
     <>

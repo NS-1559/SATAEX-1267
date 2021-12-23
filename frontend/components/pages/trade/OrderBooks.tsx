@@ -1,6 +1,5 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
-import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import { Box, Container } from '@mui/material';
 import ccxt from 'ccxt';
 
 import { useTranslate } from '@app/hooks/translate';

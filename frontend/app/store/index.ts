@@ -10,6 +10,7 @@ import Router from 'next/router';
 import { Action, AnyAction, combineReducers, Reducer } from 'redux';
 import authReducer from './auth/authSlice';
 import commonReducer from './common/commonSlice';
+import tradeReducer from './trade/tradeSlice';
 
 const routerMiddleware = createRouterMiddleware();
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   router: routerReducer,
   auth: authReducer,
   common: commonReducer,
+  trade: tradeReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
