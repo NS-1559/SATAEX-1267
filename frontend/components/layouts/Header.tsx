@@ -19,7 +19,7 @@ const navLinks = [
     label: 'app.header.buy-crypto',
   },
   {
-    href: '/trade',
+    href: '/trade/BTCUSDT',
     label: 'app.header.trade',
   },
 ];

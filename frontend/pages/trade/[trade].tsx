@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import TradingView from '@components/pages/trade/TradingView';
 import OrderBooks from '@components/pages/trade/OrderBooks';
+import MakeOrder from '@components/pages/trade/MakeOrder';
 import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
 import { useEffect } from 'react';
@@ -21,6 +22,7 @@ const Markets: NextPage = () => {
       <Seo title={t('app.markets.trade')} />
       <TradingView />
       <OrderBooks />
+      <MakeOrder />
     </>
   );
 };
