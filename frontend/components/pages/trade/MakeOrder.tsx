@@ -1,4 +1,5 @@
 import { BaseSyntheticEvent, ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useAppSelector } from '@app/hooks/redux';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import {
   Box,
@@ -75,6 +76,7 @@ function a11yProps(index: number) {
   };
 }
 
+//here
 const MakeOrder: FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -82,6 +84,7 @@ const MakeOrder: FC = () => {
   const [mode, setMode] = useState(0);
   const [orderPrice, setOrderPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const tradePair = useAppSelector((state) => state.trade.tradePair);
 
   const handleChange = (event: React.SyntheticEvent, newMode: number) => {
     console.log(newMode);

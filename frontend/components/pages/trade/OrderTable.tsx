@@ -77,19 +77,19 @@ const OrderTable: FC = () => {
   const [mode, setMode] = useState(0);
 
   const columns: GridColDef[] = [
-    { field: 'trading_pair', headerName: 'Trading Pair', width: 300 },
-    { field: 'time', headerName: 'Time', width: 200 },
-    { field: 'direction', headerName: 'Direction', width: 200 },
+    { field: 'trading_pair', headerName: 'Trading Pair', width: 150 },
+    { field: 'time', headerName: 'Time', width: 120 },
+    { field: 'direction', headerName: 'Direction', width: 120 },
     {
       field: 'price',
       headerName: 'Price',
       type: 'number',
-      width: 200,
+      width: 100,
     },
     {
       field: 'filled/quantity',
       headerName: 'Filled / Quantity',
-      width: 300,
+      width: 200,
       // description: 'This column has a value getter and is not sortable.',
       // sortable: false,
       // width: 160,
@@ -132,8 +132,11 @@ const OrderTable: FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#17181E',
-        margin: 10,
+        backgroundColor: '#1e1f20',
+        position: 'absolute',
+        minWidth: '80rem',
+        right: '7rem',
+        bottom: '-22rem',
       }}
     >
       <Box

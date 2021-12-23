@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     color: 'white',
     overflow: 'hidden',
     paddingTop: '1rem',
-    paddingBottom: '1rem',
+    paddingBottom: '16rem',
 
     display: 'flex',
     justifyContent: 'space-between',
