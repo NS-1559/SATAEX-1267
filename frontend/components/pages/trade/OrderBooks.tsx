@@ -1,30 +1,199 @@
-import { FC, useEffect, useState } from 'react';
-import { Box, Container } from '@mui/material';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { makeStyles, withStyles } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '@app/hooks/redux';
 import ccxt from 'ccxt';
 
 import { useTranslate } from '@app/hooks/translate';
 import { useTheme } from '@mui/material/styles';
 
-async function tick() {
+async function fetchOrderBooks(pair: string) {
   const exchange = new ccxt.binance({ enableRateLimit: true });
-  const response = await exchange.fetchOrderBook('BTC/USDT');
-  console.log(response);
+  const response = await exchange.fetchOrderBook(pair);
+  return response;
+}
+
+interface Book {
+  bids: number[][];
+  asks: number[][];
 }
 
 const OrderBooks: FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const [value, setValue] = useState('BTCUSDT');
-  const [orders, setOrders] = useState([{}]);
+  const { asPath, pathname } = useRouter();
+  const tradePair = useAppSelector((state) => state.trade.tradePair);
 
-  useEffect(() => {});
+  console.log(tradePair);
+  const classes = useStyles();
+  const [book, setBook] = useState<Book>({ bids: [], asks: [] });
+
+  useEffect(() => {
+    if (tradePair) {
+      // setInterval(() => {
+      var value = [tradePair.slice(0, 3), '/', tradePair.slice(3)].join('');
+      fetchOrderBooks(value).then((res) => {
+        const { asks, bids } = res;
+        setBook({
+          asks,
+          bids,
+        });
+      });
+      // }, 3000);
+    }
+  }, [tradePair]);
+
+  const { asks, bids } = book;
+
+  const asksTable = createTable(asks);
+  const bidsTable = createTable(bids, true);
 
   return (
     <Box sx={{ width: '100%', py: 8 }}>
-      <Container>OrderBooks</Container>
+      <TableContainer className={classes.root} component={Paper}>
+        <Typography
+          className={classes.title}
+          variant="h6"
+          gutterBottom
+          component="div"
+        >
+          OrderBook
+        </Typography>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCellFix className={classes.text}>Price(USDT)</TableCellFix>
+              <TableCellFix className={classes.text} align="right">
+                Quantity(BTC)
+              </TableCellFix>
+              <TableCellFix className={classes.text} align="right">
+                Amount(USDT)
+              </TableCellFix>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {asksTable.map((row) => (
+              <TableRow
+                key={row.price}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCellFix
+                  className={classes.greenText}
+                  component="th"
+                  scope="row"
+                >
+                  {row.price}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.amount}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.usdtAmount}
+                </TableCellFix>
+              </TableRow>
+            ))}
+          </TableBody>
+          <Box className={classes.space}>{tradePair}</Box>
+          <TableBody>
+            {bidsTable.map((row) => (
+              <TableRow
+                key={row.price}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCellFix
+                  className={classes.redText}
+                  component="th"
+                  scope="row"
+                >
+                  {row.price}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.amount}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.usdtAmount}
+                </TableCellFix>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };
+
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: '#1e1f20',
+    color: 'white',
+    overflow: 'hidden',
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
+  },
+  title: {
+    paddingLeft: '1rem',
+  },
+
+  text: {
+    color: 'white',
+  },
+  redText: {
+    color: '#ce3028',
+    fontWeight: 'bold',
+  },
+
+  greenText: {
+    color: '#3fb979',
+    fontWeight: 'bold',
+  },
+  space: {
+    width: '3000px',
+    backgroundColor: '#232429',
+    padding: '0.5rem',
+    paddingLeft: '1rem',
+  },
+});
+
+const TableCellFix = withStyles({
+  root: {
+    borderBottom: 'none',
+  },
+})(TableCell);
+
+function createTable(array: any, reverse: boolean = false) {
+  const data = [];
+  if (reverse) {
+    for (let i = 0; i < array.length; i++) {
+      data.push(createRowData(array[i][0], array[i][1]));
+    }
+  } else {
+    for (let i = array.length - 1; i >= 0; i--) {
+      data.push(createRowData(array[i][0], array[i][1]));
+    }
+  }
+
+  return data.slice(0, 8);
+}
+
+function createRowData(price: number, amount: number) {
+  const usdtAmount: number = price * amount;
+  return { price, amount, usdtAmount };
+}
+
+const askRow = [
+  createRowData(49000, 222),
+  createRowData(49000, 222),
+  createRowData(49000, 222),
+];
 
 const tokenList = [
   { label: 'BTC/USDT', value: 'BTCUSDT' },

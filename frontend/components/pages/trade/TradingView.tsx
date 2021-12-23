@@ -15,7 +15,7 @@ const tokenList = [
 
 const TradingView: FC = () => {
   const router = useRouter();
-  const tradePair = useAppSelector((state) => state.trade.tradePair);
+  const tradePair = router.asPath.split('/')[2];
   console.log(tradePair);
 
   return (

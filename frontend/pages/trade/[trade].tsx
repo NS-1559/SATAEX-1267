@@ -12,7 +12,6 @@ const Markets: NextPage = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslate();
   const { query } = useRouter();
-
   useEffect(() => {
     dispatch(tradeActions.setTradePair(query.trade as string));
   }, [query, dispatch]);
