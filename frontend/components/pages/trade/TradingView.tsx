@@ -59,6 +59,7 @@ const TradingView: FC = () => {
           width={'100%'}
           symbol={value}
           allow_symbol_change={false}
+          container_id="tradingview_28afa"
         ></AdvancedRealTimeChart>
       </Container>
     </Box>
