@@ -27,7 +27,7 @@ const filter = createFilterOptions();
 const TradingView: FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const [value, setValue] = useState('DOTUSDT');
+  const [value, setValue] = useState('BTCUSDT');
 
   return (
     <Box sx={{ width: '100%', py: 8 }}>
@@ -49,7 +49,7 @@ const TradingView: FC = () => {
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, token) => {
-              setValue(token?.value);
+              setValue(token?.value || 'BTCUSDT');
             }}
           />
         </Box>
