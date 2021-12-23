@@ -29,13 +29,16 @@ const TradingView: FC = () => {
             mb: 2,
           }}
         >
-          <FormLabel sx={{ fontWeight: 'bold', fontSize: 20 }}>
+          <FormLabel sx={{ fontWeight: 'bold', fontSize: 20, color: 'white' }}>
             {tradePair}
           </FormLabel>
           <Autocomplete
             id="combo-box-demo"
             options={tokenList}
-            sx={{ width: 300 }}
+            sx={{
+              width: 300,
+              backgroundColor: '#2c2d2e',
+            }}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, token) => {
               console.log(token);

@@ -58,7 +58,7 @@ const OrderBooks: FC = () => {
   const bidsTable = createTable(bids, true);
 
   return (
-    <Box sx={{ width: '100%', py: 8 }}>
+    <Box sx={{ width: '100%', py: 8, maxWidth: 400 }}>
       <TableContainer className={classes.root} component={Paper}>
         <Typography
           className={classes.title}
@@ -68,7 +68,11 @@ const OrderBooks: FC = () => {
         >
           OrderBook
         </Typography>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{ maxWidth: 300 }}
+          className={classes.table}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCellFix className={classes.text}>Price(USDT)</TableCellFix>
@@ -138,25 +142,37 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     paddingTop: '1rem',
     paddingBottom: '1rem',
+    fontSize: '0.7rem',
   },
+
+  table: {
+    margin: 'auto',
+  },
+
   title: {
     paddingLeft: '1rem',
+    textAlign: 'left',
+    margin: 'auto',
+    textIndent: '1.4rem',
   },
 
   text: {
     color: 'white',
+    fontSize: '0.7rem',
   },
   redText: {
+    fontSize: '0.7rem',
     color: '#ce3028',
     fontWeight: 'bold',
   },
 
   greenText: {
+    fontSize: '0.7rem',
     color: '#3fb979',
     fontWeight: 'bold',
   },
   space: {
-    width: '3000px',
+    width: '100px',
     backgroundColor: '#232429',
     padding: '0.5rem',
     paddingLeft: '1rem',

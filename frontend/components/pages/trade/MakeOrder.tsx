@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    fontSize: '0.8rem'
   },
   textColor: {
     color: '#86868A',
@@ -113,10 +114,13 @@ const MakeOrder: FC = () => {
   return (
     <Box
       sx={{
-        width: 300,
-        height: 600,
+        minWidth: '360px',
+        height: 682,
         backgroundColor: '#17181E',
-        margin: 10,
+        marginTop: 8,
+
+        marginRight: 4,
+        paddingTop: 3
       }}
     >
       <Box
