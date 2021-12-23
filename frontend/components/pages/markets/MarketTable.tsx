@@ -1,4 +1,6 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { useAppSelector } from '@app/hooks/redux';
+import { useTranslate } from '@app/hooks/translate';
+import { Coin } from '@models/Coin';
 import {
   Box,
   Button,
@@ -14,18 +16,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import Image from 'next/image';
+import { useTheme } from '@mui/material/styles';
+import { formatChartUrl } from '@utils/chart';
 import {
   formatNumberWithSuffix,
   formatPrice,
   formatPriceChange,
 } from '@utils/price';
-import { formatChartUrl } from '@utils/chart';
-import { useTranslate } from '@app/hooks/translate';
-import { useTheme } from '@mui/material/styles';
-import { useAppSelector } from '@app/hooks/redux';
+import Image from 'next/image';
+import { ChangeEvent, FC, useMemo, useState } from 'react';
 import { Search } from 'react-feather';
-import { Coin } from '@models/Coin';
 
 const MarketTable: FC = () => {
   const { t } = useTranslate();
@@ -34,19 +34,21 @@ const MarketTable: FC = () => {
     return state.common.coins.data;
   });
   const topTokens = tokens.slice(0, 50);
-  const [displayTokens, setDisplayTokens] = useState(topTokens);
+  const [keyword, setKeyword] = useState('');
+
+  const displayTokens = useMemo(() => {
+    if (keyword)
+      return tokens.filter(
+        (item: Coin) =>
+          item.name.toLowerCase().includes(keyword) ||
+          item.symbol.toLowerCase().includes(keyword),
+      );
+    return topTokens;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyword, topTokens]);
 
   const onKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const keyword = e.target.value.toLowerCase();
-    if (keyword) {
-      setDisplayTokens(
-        tokens.filter(
-          (item: Coin) =>
-            item.name.toLowerCase().includes(keyword) ||
-            item.symbol.toLowerCase().includes(keyword),
-        ),
-      );
-    } else setDisplayTokens(topTokens);
+    setKeyword(e.target.value.toLowerCase());
   };
 
   return (
