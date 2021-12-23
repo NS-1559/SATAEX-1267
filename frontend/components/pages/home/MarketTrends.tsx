@@ -131,7 +131,7 @@ const MarketTrends: FC = () => {
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
-                      <Image
+                      <img
                         src={formatChartUrl(coin.image.small)}
                         alt={coin.id}
                         height={40}
