@@ -11,6 +11,19 @@ const tokenList = [
   { label: 'BNB/USDT', value: 'BNBUSDT' },
   { label: 'DOT/USDT', value: 'DOTUSDT' },
   { label: 'ADA/USDT', value: 'ADAUSDT' },
+  { label: 'LUNA/USDT', value: 'LUNAUSDT' },
+  { label: 'MATIC/USDT', value: 'MATICUSDT' },
+  { label: 'SHIB/USDT', value: 'SHIBUSDT' },
+  { label: 'DOGE/USDT', value: 'DOGEUSDT' },
+  { label: 'ALICE/USDT', value: 'ALICEUSDT' },
+  { label: 'OGN/USDT', value: 'OGNUSDT' },
+  { label: 'AXS/USDT', value: 'AXSUSDT' },
+  { label: 'EOS/USDT', value: 'EOSUSDT' },
+  { label: 'TLM/USDT', value: 'TLMUSDT' },
+  { label: 'MBOX/USDT', value: 'MBOXUSDT' },
+  { label: 'SAND/USDT', value: 'SANDUSDT' },
+  { label: 'MANA/USDT', value: 'MANAUSDT' },
+  { label: 'ICP/USDT', value: 'ICPUSDT' },
 ];
 
 const TradingView: FC = () => {

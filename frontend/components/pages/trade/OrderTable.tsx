@@ -1,172 +1,260 @@
-import {
-  BaseSyntheticEvent,
-  ChangeEvent,
-  FC,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from 'react';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
-import {
-  Box,
-  Button,
-  Tabs,
-  Tab,
-  Container,
-  Typography,
-  Slider,
-} from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { makeStyles, withStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { useRouter } from 'next/router';
+import { useAppSelector } from '@app/hooks/redux';
 import ccxt from 'ccxt';
 
 import { useTranslate } from '@app/hooks/translate';
 import { useTheme } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles({
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
-    height: 48,
-    padding: '0 30px',
-  },
-  textColor: {
-    color: '#86868A',
-  },
-  textField: {
-    borderColor: '#86868A',
-    color: '#86868A',
-    width: '100%',
-  },
-});
-
-function TabPanel(props: any) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
+async function fetchOrderBooks(pair: string) {
+  const exchange = new ccxt.binance({ enableRateLimit: true });
+  const response = await exchange.fetchOrderBook(pair);
+  return response;
 }
 
 const OrderTable: FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
+
   const classes = useStyles();
-  const [mode, setMode] = useState(0);
 
-  const columns: GridColDef[] = [
-    { field: 'trading_pair', headerName: 'Trading Pair', width: 150 },
-    { field: 'time', headerName: 'Time', width: 120 },
-    { field: 'direction', headerName: 'Direction', width: 120 },
-    {
-      field: 'price',
-      headerName: 'Price',
-      type: 'number',
-      width: 100,
-    },
-    {
-      field: 'filled/quantity',
-      headerName: 'Filled / Quantity',
-      width: 200,
-      // description: 'This column has a value getter and is not sortable.',
-      // sortable: false,
-      // width: 160,
-      // valueGetter: (params: GridValueGetterParams) =>
-      //   `${params.getValue(params.id, 'firstName') || ''} ${
-      //     params.getValue(params.id, 'lastName') || ''
-      //   }`,
-    },
-    {
-      field: 'amount',
-      headerName: 'Amount',
-      type: 'number',
-      width: 200,
-    },
-    {
-      field: 'action',
-      headerName: 'Action',
-      type: 'number',
-      width: 200,
-    },
-  ];
+  useEffect(() => {}, []);
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-
-  const handleChange = (event: React.SyntheticEvent, newMode: number) => {
-    setMode(newMode);
-  };
-  const modeList = ['Limit Order', 'Order History'];
+  const dataTable: any = createTable([], true);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: '#1e1f20',
-        position: 'absolute',
-        minWidth: '80rem',
-        right: '7rem',
-        bottom: '-22rem',
-      }}
-    >
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-        }}
-      >
-        <Tabs
-          value={mode}
-          onChange={handleChange}
-          aria-label="basic tabs example"
+    <Box sx={{ width: '100%', py: 8, maxWidth: 1600 }}>
+      <TableContainer className={classes.root} component={Paper}>
+        <Table
+          sx={{ minWidth: 1400 }}
+          className={classes.table}
+          aria-label="simple table"
         >
-          <Tab label="Limit Order" {...a11yProps(0)} />
-          <Tab label="Order History" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={mode} index={0}>
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-          />
-        </div>
-      </TabPanel>
-      <TabPanel value={mode} index={1}></TabPanel>
+          <TableHead>
+            <TableRow>
+              <TableCellFix>Trading Pair</TableCellFix>
+              <TableCellFix align="left">Time</TableCellFix>
+              <TableCellFix align="right">Direction</TableCellFix>
+              <TableCellFix align="right">Price</TableCellFix>
+              <TableCellFix align="right">Quantity</TableCellFix>
+              <TableCellFix align="right">USDT amount</TableCellFix>
+              <TableCellFix align="right">Type</TableCellFix>
+              <TableCellFix align="right">Status</TableCellFix>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {dataTable.map((row: any) => (
+              <TableRow
+                key={row.time}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCellFix
+                  className={classes.text}
+                  component="th"
+                  scope="row"
+                >
+                  {row.tradingPair}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="left">
+                  {row.time}
+                </TableCellFix>
+                <TableCellFix
+                  className={`${classes.text} ${
+                    row.direction === 'Buy'
+                      ? classes.greenText
+                      : classes.redText
+                  }`}
+                  align="right"
+                >
+                  {row.direction}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.price}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.quantity}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.price * row.quantity} USDT
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.type}
+                </TableCellFix>
+                <TableCellFix className={classes.text} align="right">
+                  {row.status}
+                </TableCellFix>
+                {row.status === 'pending' && (
+                  <TableCellFix className={classes.text} align="right">
+                    <span className={classes.cancelButton}>cancel</span>
+                  </TableCellFix>
+                )}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Button className={classes.viewAllButton} variant="contained">
+          View all
+        </Button>
+      </TableContainer>
     </Box>
   );
 };
+
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: '#1e1f20',
+    color: 'white',
+    overflow: 'hidden',
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
+    fontSize: '0.7rem',
+  },
+
+  table: {},
+
+  orderTab: {
+    paddingLeft: '1rem',
+    textAlign: 'left',
+    margin: 'auto',
+    textIndent: '1.4rem',
+    cursor: 'pointer',
+  },
+
+  activeTab: {
+    color: '#16b979',
+  },
+
+  text: {
+    color: 'white',
+    fontSize: '0.7rem',
+  },
+  redText: {
+    fontSize: '0.7rem',
+    color: '#ce3028',
+    fontWeight: 'bold',
+  },
+
+  greenText: {
+    fontSize: '0.7rem',
+    color: '#3fb979',
+    fontWeight: 'bold',
+  },
+  space: {
+    width: '100px',
+    backgroundColor: '#232429',
+    padding: '0.5rem',
+    paddingLeft: '1rem',
+  },
+
+  cancelButton: {
+    padding: '0.3rem 0.6rem',
+    color: '#16b979',
+    transition: '0.3s',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    userSelect: 'none',
+    borderRadius: '4px',
+    transform: 'translate(100px, 0px)',
+    '&:hover': {
+      backgroundColor: '#585858',
+    },
+  },
+
+  viewAllButton: {
+    marginLeft: '1rem',
+  },
+});
+
+const TableCellFix = withStyles({
+  root: {
+    borderBottom: 'none',
+  },
+})(TableCell);
+
+function createTable(array: any, filter: any) {
+  const data = [
+    {
+      tradingPair: 'BTC/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Buy',
+      price: 46000,
+      quantity: 0.04,
+      type: 'limit',
+      status: 'pending',
+    },
+    {
+      tradingPair: 'ADA/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Buy',
+      price: 1.1,
+      quantity: 100,
+      type: 'limit',
+      status: 'completed',
+    },
+    {
+      tradingPair: 'BNB/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Sell',
+      price: 600,
+      quantity: 10,
+      type: 'market',
+      status: 'completed',
+    },
+
+    {
+      tradingPair: 'BNB/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Sell',
+      price: 600,
+      quantity: 10,
+      type: 'market',
+      status: 'completed',
+    },
+    {
+      tradingPair: 'BTC/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Buy',
+      price: 46000,
+      quantity: 0.04,
+      type: 'limit',
+      status: 'pending',
+    },
+    {
+      tradingPair: 'BTC/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Buy',
+      price: 46000,
+      quantity: 0.04,
+      type: 'limit',
+      status: 'pending',
+    },
+    {
+      tradingPair: 'BTC/USDT',
+      time: '2021-12-26 04:06:50',
+      direction: 'Buy',
+      price: 46000,
+      quantity: 0.04,
+      type: 'limit',
+      status: 'pending',
+    },
+  ];
+
+  return data.slice(0, 7);
+}
+
+function createRowData(price: number, amount: number) {
+  const usdtAmount: number = price * amount;
+  return { price, amount, usdtAmount };
+}
 
 export default OrderTable;

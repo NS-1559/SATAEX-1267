@@ -28,8 +28,10 @@ const Markets: NextPage = () => {
         <OrderBooks />
         <TradingView />
         <MakeOrder />
+        <Box className={classes.orderTableWrap}>
+          <OrderTable />
+        </Box>
       </Box>
-      <OrderTable />
     </>
   );
 };
@@ -44,6 +46,14 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    position: 'relative',
+  },
+
+  orderTableWrap: {
+    minWidth: '1400px',
+    position: 'absolute',
+    top: '54%',
+    right: '0.5rem',
   },
 });
 
