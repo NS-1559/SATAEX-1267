@@ -33,13 +33,9 @@ const OrderTable: FC = () => {
   const dataTable: any = createTable([], true);
 
   return (
-    <Box sx={{ width: '100%', py: 8, maxWidth: 1600 }}>
+    <Box sx={{ width: '100%', paddingTop: 0, py: 8, maxWidth: 1600 }}>
       <TableContainer className={classes.root} component={Paper}>
-        <Table
-          sx={{ minWidth: 1400 }}
-          className={classes.table}
-          aria-label="simple table"
-        >
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCellFix>Trading Pair</TableCellFix>
@@ -115,12 +111,9 @@ const useStyles = makeStyles({
     backgroundColor: '#1e1f20',
     color: 'white',
     overflow: 'hidden',
-    paddingTop: '1rem',
-    paddingBottom: '1rem',
     fontSize: '0.7rem',
+    paddingBottom: '1rem',
   },
-
-  table: {},
 
   orderTab: {
     paddingLeft: '1rem',

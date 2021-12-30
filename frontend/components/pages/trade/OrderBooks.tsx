@@ -145,8 +145,6 @@ const useStyles = makeStyles({
     backgroundColor: '#1e1f20',
     color: 'white',
     overflow: 'hidden',
-    paddingTop: '1rem',
-    paddingBottom: '1rem',
     fontSize: '0.7rem',
   },
 

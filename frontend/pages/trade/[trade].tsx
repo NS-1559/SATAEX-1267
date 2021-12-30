@@ -28,9 +28,9 @@ const Markets: NextPage = () => {
         <OrderBooks />
         <TradingView />
         <MakeOrder />
-        <Box className={classes.orderTableWrap}>
-          <OrderTable />
-        </Box>
+      </Box>
+      <Box className={classes.orderTableWrap}>
+        <OrderTable />
       </Box>
     </>
   );
@@ -41,19 +41,14 @@ const useStyles = makeStyles({
     backgroundColor: '#1e1f20',
     color: 'white',
     overflow: 'hidden',
-    paddingBottom: '16rem',
-
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    position: 'relative',
   },
 
   orderTableWrap: {
-    minWidth: '1400px',
-    position: 'absolute',
-    top: '54%',
-    right: '0.5rem',
+    backgroundColor: '#1e1f20',
+    display: 'flex',
+    justifyContent: 'center',
   },
 });
 
