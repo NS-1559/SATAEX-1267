@@ -39,7 +39,6 @@ const useStyles = makeStyles({
     backgroundColor: '#1e1f20',
     color: 'white',
     overflow: 'hidden',
-    paddingTop: '1rem',
     paddingBottom: '16rem',
 
     display: 'flex',

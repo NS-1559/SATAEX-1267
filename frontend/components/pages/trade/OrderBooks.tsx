@@ -91,7 +91,7 @@ const OrderBooks: FC = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCellFix
-                  className={classes.greenText}
+                  className={classes.redText}
                   component="th"
                   scope="row"
                 >
@@ -114,7 +114,7 @@ const OrderBooks: FC = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCellFix
-                  className={classes.redText}
+                  className={classes.greenText}
                   component="th"
                   scope="row"
                 >

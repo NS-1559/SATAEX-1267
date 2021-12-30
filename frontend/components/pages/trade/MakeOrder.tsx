@@ -198,7 +198,7 @@ const MakeOrder: FC = () => {
             variant="outlined"
             className={classes.textField}
             InputProps={{
-              endAdornment: <InputAdornment position="end">BIT</InputAdornment>,
+              endAdornment: <InputAdornment position="end"></InputAdornment>,
             }}
             onChange={handleQuantityChange}
           />
@@ -218,7 +218,7 @@ const MakeOrder: FC = () => {
           }}
           onClick={onSubmit}
         >
-          Buy BIT
+          Buy
         </Button>
         <Box
           sx={{
@@ -246,7 +246,7 @@ const MakeOrder: FC = () => {
             variant="outlined"
             className={classes.textField}
             InputProps={{
-              endAdornment: <InputAdornment position="end">BIT</InputAdornment>,
+              endAdornment: <InputAdornment position="end"></InputAdornment>,
             }}
             onChange={handleQuantityChange}
           />
@@ -266,7 +266,7 @@ const MakeOrder: FC = () => {
           }}
           onClick={onSubmit}
         >
-          Buy BIT
+          Buy
         </Button>
         <Box
           sx={{
