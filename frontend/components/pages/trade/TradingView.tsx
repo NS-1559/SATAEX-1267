@@ -54,6 +54,7 @@ const TradingView: FC = () => {
           symbol={tradePair}
           allow_symbol_change={false}
           container_id="tradingview_28afa"
+          interval="D"
         />
       </Container>
     </Box>

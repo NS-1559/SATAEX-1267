@@ -38,18 +38,23 @@ const OrderBooks: FC = () => {
   const [book, setBook] = useState<Book>({ bids: [], asks: [] });
 
   useEffect(() => {
-    if (tradePair) {
-      // setInterval(() => {
-      var value = [tradePair.slice(0, 3), '/', tradePair.slice(3)].join('');
-      fetchOrderBooks(value).then((res) => {
-        const { asks, bids } = res;
-        setBook({
-          asks,
-          bids,
+    const interval = setInterval(() => {
+      if (tradePair) {
+        var value = [
+          tradePair.slice(0, tradePair.length - 4),
+          '/',
+          tradePair.slice(tradePair.length - 4),
+        ].join('');
+        fetchOrderBooks(value).then((res) => {
+          const { asks, bids } = res;
+          setBook({
+            asks,
+            bids,
+          });
         });
-      });
-      // }, 3000);
-    }
+      }
+    }, 1400);
+    return () => clearInterval(interval);
   }, [tradePair]);
 
   const { asks, bids } = book;

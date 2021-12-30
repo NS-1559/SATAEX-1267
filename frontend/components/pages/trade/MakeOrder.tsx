@@ -1,4 +1,11 @@
-import { BaseSyntheticEvent, ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react';
+import {
+  BaseSyntheticEvent,
+  ChangeEvent,
+  FC,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { useAppSelector } from '@app/hooks/redux';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import {
@@ -37,7 +44,7 @@ const useStyles = makeStyles({
     color: 'white',
     height: 48,
     padding: '0 30px',
-    fontSize: '0.8rem'
+    fontSize: '0.8rem',
   },
   textColor: {
     color: '#86868A',
@@ -97,11 +104,11 @@ const MakeOrder: FC = () => {
 
   const handleOrderPriceChange = (e: BaseSyntheticEvent) => {
     setOrderPrice(e.target.value);
-  }
+  };
 
   const handleQuantityChange = (e: BaseSyntheticEvent) => {
     setQuantity(e.target.value);
-  }
+  };
 
   const modeList = ['limit', 'market'];
 
@@ -110,9 +117,9 @@ const MakeOrder: FC = () => {
       mode: modeList[mode],
       orderPrice,
       quantity,
-    })
-    alert('Make order success ...')
-  }
+    });
+    alert('Make order success ...');
+  };
 
   return (
     <Box
@@ -123,7 +130,7 @@ const MakeOrder: FC = () => {
         marginTop: 8,
 
         marginRight: 4,
-        paddingTop: 3
+        paddingTop: 3,
       }}
     >
       <Box
@@ -227,12 +234,12 @@ const MakeOrder: FC = () => {
             justifyContent: 'flex-end',
             mb: 2,
             fontSize: 'small',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
-          Spot Trading Fees >
+          Spot Trading Fees
         </Box>
-        <Divider sx={{borderColor: 'white'}}/>
+        <Divider sx={{ borderColor: 'white' }} />
       </TabPanel>
       <TabPanel value={mode} index={1}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
@@ -275,12 +282,12 @@ const MakeOrder: FC = () => {
             justifyContent: 'flex-end',
             mb: 2,
             fontSize: 'small',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         >
-          Spot Trading Fees >
+          Spot Trading Fees
         </Box>
-        <Divider sx={{borderColor: 'white'}}/>
+        <Divider sx={{ borderColor: 'white' }} />
       </TabPanel>
       <TabPanel value={mode} index={2}>
         Item Three
