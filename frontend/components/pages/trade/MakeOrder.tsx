@@ -69,6 +69,10 @@ const MakeOrder: FC = () => {
     }
   };
 
+  const handleMakeOfferClick = (event: any) => {
+    console.log(direction, mode, orderPrice, quantity);
+  };
+
   return (
     <Box className={classes.root}>
       <Typography className={classes.title} variant="h6" component="h6">
@@ -136,7 +140,16 @@ const MakeOrder: FC = () => {
           </Select>
         </Box>
       </TabsUnstyled>
-      <Button className={classes.submitButton} variant="contained">
+      <Box className={classes.inputWrap}>
+        <label className={classes.normalText}>
+          Available {direction === 'buy' ? 'USDT' : tokenSymbol}: 1000
+        </label>
+      </Box>
+      <Button
+        onClick={handleMakeOfferClick}
+        className={classes.submitButton}
+        variant="contained"
+      >
         Make Order
       </Button>
     </Box>
