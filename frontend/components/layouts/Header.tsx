@@ -15,8 +15,8 @@ const navLinks = [
     label: 'app.header.markets',
   },
   {
-    href: '/buy-crypto',
-    label: 'app.header.buy-crypto',
+    href: '/p2p',
+    label: 'app.header.p2p',
   },
   {
     href: '/trade/BTCUSDT',
