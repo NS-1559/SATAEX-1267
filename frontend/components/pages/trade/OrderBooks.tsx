@@ -144,7 +144,6 @@ const useStyles = makeStyles({
   root: {
     backgroundColor: '#1e1f20',
     color: 'white',
-    overflow: 'hidden',
     fontSize: '0.7rem',
   },
 
@@ -200,7 +199,7 @@ function createTable(array: any, reverse: boolean = false) {
     }
   }
 
-  return data.slice(0, 8);
+  return data.slice(0, 6);
 }
 
 function createRowData(price: number, amount: number) {
