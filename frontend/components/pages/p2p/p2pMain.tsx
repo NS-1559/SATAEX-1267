@@ -1,57 +1,149 @@
 import { useAppSelector } from '@app/hooks/redux';
 import { useTranslate } from '@app/hooks/translate';
 import { Coin } from '@models/Coin';
+import { useTheme } from '@mui/material/styles';
+import { ChangeEvent, FC, useMemo, useState } from 'react';
 import {
   Box,
   Button,
-  Container,
+  Divider,
+  FormLabel,
+  Input,
   InputAdornment,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   TextField,
   Typography,
+  ButtonGroup,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { formatChartUrl } from '@utils/chart';
-import {
-  formatNumberWithSuffix,
-  formatPrice,
-  formatPriceChange,
-} from '@utils/price';
-import Image from 'next/image';
-import { ChangeEvent, FC, useMemo, useState } from 'react';
-import { Search } from 'react-feather';
+
+import { styled } from '@mui/system';
+import TabsUnstyled from '@mui/base/TabsUnstyled';
+import TabsListUnstyled from '@mui/base/TabsListUnstyled';
+import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
+
+import MakeP2pOrder from './makeP2pOrder';
+import P2pTable from './p2pTable';
+
+import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
+import { makeStyles } from '@mui/styles';
 
 const P2pMain: FC = () => {
   const { t } = useTranslate();
-  const theme = useTheme();
-  const tokens = useAppSelector((state) => {
-    return state.common.coins.data;
-  });
-  const topTokens = tokens.slice(0, 50);
-  const [keyword, setKeyword] = useState('');
+  const classes = useStyles();
 
-  const displayTokens = useMemo(() => {
-    if (keyword)
-      return tokens.filter(
-        (item: Coin) =>
-          item.name.toLowerCase().includes(keyword) ||
-          item.symbol.toLowerCase().includes(keyword),
-      );
-    return topTokens;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyword, topTokens]);
+  const [makeP2pOrderActive, setP2pOrderActive] = useState(false);
+  const [tableActive, setTableActive] = useState(true);
 
-  const onKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value.toLowerCase());
+  const handleMakeP2pOrderButtonClick = (newStatus: any) => {
+    setP2pOrderActive(newStatus);
   };
 
-  return <Box sx={{ width: '100%', py: 8 }}>P2P</Box>;
+  return (
+    <Box className={classes.root} sx={{ width: '100%', py: 8 }}>
+      {tableActive && (
+        <P2pTable
+          handleMakeP2pOrderButtonClick={handleMakeP2pOrderButtonClick}
+        />
+      )}
+      {makeP2pOrderActive && <MakeP2pOrder />}
+    </Box>
+  );
 };
+
+const useStyles = makeStyles({
+  root: {},
+
+  normalText: {
+    fontSize: '1rem',
+    fontWeight: 300,
+    textIndent: '0.5rem',
+    fontFamily: 'sans-serif',
+    color: 'white',
+  },
+
+  span: {
+    fontWeight: 500,
+    color: '#cb4545',
+    marginLeft: '1rem',
+  },
+
+  tabButton: {},
+
+  activeTabButton: {},
+
+  bgGreen: {
+    backgroundColor: '#24ae64',
+  },
+  bgRed: {
+    backgroundColor: '#e04040',
+  },
+
+  inputWrap: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '1rem',
+  },
+
+  input: {
+    maxHeight: '50px',
+    color: 'white',
+    borderColor: 'tomato',
+  },
+
+  submitButton: {
+    margin: 'auto',
+    marginTop: '2rem',
+
+    padding: '0.5rem 0rem',
+
+    width: '100%',
+  },
+});
+
+//  Tab button
+const color = {
+  hoverColor: '#74748014',
+  buy: '#24ae64', // Buy green
+  sell: '#e04040', // Sell green
+  activeColor: '',
+};
+
+const Tab = styled(TabUnstyled)`
+  font-family: IBM Plex Sans, sans-serif;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: transparent;
+  width: 100%;
+  padding: 12px 16px;
+  margin: 6px 6px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+
+  &.${tabUnstyledClasses.selected} {
+    background-color: ${(props: any) =>
+      props.value === 'buy' ? color['buy'] : color['sell']};
+  }
+`;
+
+const TabPanel = styled(TabPanelUnstyled)`
+  width: 100%;
+  font-family: IBM Plex Sans, sans-serif;
+  font-size: 0.875rem;
+`;
+
+const TabsList = styled(TabsListUnstyled)`
+  min-width: 320px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: space-between;
+  margin-bottom: '1rem';
+`;
 
 export default P2pMain;
