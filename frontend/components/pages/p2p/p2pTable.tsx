@@ -28,7 +28,7 @@ import { ChangeEvent, FC, useMemo, useState } from 'react';
 import { Search } from 'react-feather';
 
 const P2pTable: FC = (props: any) => {
-  const handleMakeP2pOrderButtonClick = props.handleMakeP2pOrderButtonClick;
+  const { handleMakeP2pOrderButtonClick } = props;
   const { t } = useTranslate();
   const theme = useTheme();
   const p2pLists: any = [

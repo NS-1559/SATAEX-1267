@@ -23,7 +23,8 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { makeStyles } from '@mui/styles';
 
-const MakeP2pOrder: FC = () => {
+const MakeP2pOrder: FC = (props: any) => {
+  const { handleCancleP2pOrderButtonClick } = props;
   const { t } = useTranslate();
   const classes = useStyles();
   const [direction, setDirection] = useState('buy');
@@ -77,7 +78,7 @@ const MakeP2pOrder: FC = () => {
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>VND</label>
           <TextField
-            size="small"
+            size="medium"
             type="number"
             className={classes.input}
             label="VND"
@@ -89,7 +90,7 @@ const MakeP2pOrder: FC = () => {
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>USDT</label>
           <TextField
-            size="small"
+            size="medium"
             type="number"
             className={classes.input}
             label="USDT"
@@ -102,7 +103,7 @@ const MakeP2pOrder: FC = () => {
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Payment method</label>
           <TextField
-            size="small"
+            size="medium"
             className={classes.input}
             value={paymentMethod}
             name="paymentMethod"
@@ -112,7 +113,7 @@ const MakeP2pOrder: FC = () => {
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Bank Card ID</label>
           <TextField
-            size="small"
+            size="medium"
             className={classes.input}
             value={bankCardId}
             name="bankCardId"
@@ -126,6 +127,14 @@ const MakeP2pOrder: FC = () => {
         >
           Make Order
         </Button>
+        <Button
+          onClick={handleCancleP2pOrderButtonClick}
+          className={classes.cancelButton}
+          variant="contained"
+          color="error"
+        >
+          cancel
+        </Button>
       </TabsUnstyled>
     </Box>
   );
@@ -133,12 +142,13 @@ const MakeP2pOrder: FC = () => {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '35rem',
+    maxWidth: '40rem',
     margin: 'auto',
-    marginTop: '5rem',
+    marginTop: '0.5rem',
     backgroundColor: '#202020',
     padding: '2rem 1rem',
     borderRadius: '8px',
+    position: 'relative',
   },
 
   normalText: {
@@ -182,6 +192,15 @@ const useStyles = makeStyles({
   submitButton: {
     margin: 'auto',
     marginTop: '2rem',
+
+    padding: '0.5rem 0rem',
+
+    width: '100%',
+  },
+
+  cancelButton: {
+    margin: 'auto',
+    marginTop: '1rem',
 
     padding: '0.5rem 0rem',
 

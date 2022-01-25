@@ -35,16 +35,33 @@ const P2pMain: FC = () => {
 
   const handleMakeP2pOrderButtonClick = (newStatus: any) => {
     setP2pOrderActive(newStatus);
+    setTableActive(false);
+  };
+
+  const p2pTableProps: any = {
+    //properties
+    handleMakeP2pOrderButtonClick: handleMakeP2pOrderButtonClick,
+    //etc...
+  };
+
+  const handleSubmitP2pOrderButtonClick = () => {};
+
+  const handleCancleP2pOrderButtonClick = () => {
+    setP2pOrderActive(false);
+    setTableActive(true);
+  };
+
+  const makeP2pOrderProps: any = {
+    //properties
+    handleSubmitP2pOrderButtonClick: handleSubmitP2pOrderButtonClick,
+    handleCancleP2pOrderButtonClick: handleCancleP2pOrderButtonClick,
+    //etc...
   };
 
   return (
     <Box className={classes.root} sx={{ width: '100%', py: 8 }}>
-      {tableActive && (
-        <P2pTable
-          handleMakeP2pOrderButtonClick={handleMakeP2pOrderButtonClick}
-        />
-      )}
-      {makeP2pOrderActive && <MakeP2pOrder />}
+      {tableActive && <P2pTable {...p2pTableProps} />}
+      {makeP2pOrderActive && <MakeP2pOrder {...makeP2pOrderProps} />}
     </Box>
   );
 };
