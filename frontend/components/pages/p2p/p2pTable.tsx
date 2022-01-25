@@ -60,7 +60,7 @@ const P2pTable: FC = (props: any) => {
       bankCardId: '1009383303',
       direction: 'sell',
       phoneNumber: '09878239283',
-      note: 'if you want to buy, call me with phone: 09878239283',
+      note: 'if you want to buy, call me with phone: 09878239283lllllllllllllllllllllllllllllllllllllllllllllll',
     },
   ];
 

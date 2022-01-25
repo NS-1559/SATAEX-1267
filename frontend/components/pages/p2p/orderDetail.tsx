@@ -12,12 +12,15 @@ import {
   InputAdornment,
   Typography,
   ButtonGroup,
+  Container,
 } from '@mui/material';
 
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { makeStyles } from '@mui/styles';
@@ -26,6 +29,17 @@ const OrderDetail: FC = (props: any) => {
   const { handleCancleP2pOrderButtonClick, orderDetail } = props;
   const { t } = useTranslate();
   const classes = useStyles();
+
+  const [confirmStatus, setConfirmStatus] = useState(false);
+  const [transferredStatus, setTransferredStatus] = useState(false);
+
+  const handleConfirmButtonClick = () => {
+    setConfirmStatus(true);
+  };
+
+  const handleTransferredButtonClick = () => {
+    setTransferredStatus(true);
+  };
 
   console.log(orderDetail);
   const {
@@ -46,43 +60,104 @@ const OrderDetail: FC = (props: any) => {
         </TabsList>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>VND</label>
-          <Typography>{VNDQuantity} - VND</Typography>
+          <Typography className={classes.orderContent}>
+            {VNDQuantity} - VND
+          </Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>USDT</label>
-          <Typography>{USDTQuantity} $</Typography>
+          <Typography className={classes.orderContent}>
+            {USDTQuantity} $
+          </Typography>
         </Box>
 
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Payment method</label>
-          <Typography>{paymentMethod}</Typography>
+          <Typography className={classes.orderContent}>
+            {paymentMethod}
+          </Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Bank Card ID</label>
-          <Typography>{bankCardId}</Typography>
+          <Typography className={classes.orderContent}>{bankCardId}</Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Phone number</label>
-          <Typography>{phoneNumber}</Typography>
+          <Typography className={classes.orderContent}>
+            {phoneNumber}
+          </Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Note</label>
-          <Typography>{note}</Typography>
         </Box>
-        <Button className={classes.submitButton} variant="contained">
-          Confirm
-        </Button>
-        <Button
-          onClick={handleCancleP2pOrderButtonClick}
-          className={classes.cancelButton}
-          variant="contained"
-          color="error"
-        >
-          cancel
-        </Button>
+        <Box>
+          <Typography className={classes.orderContent}>{note}</Typography>
+        </Box>
+        {confirmStatus || (
+          <>
+            <Button
+              className={classes.submitButton}
+              variant="contained"
+              onClick={handleConfirmButtonClick}
+            >
+              Confirm
+            </Button>
+            <Button
+              onClick={handleCancleP2pOrderButtonClick}
+              className={classes.cancelButton}
+              variant="contained"
+              color="error"
+            >
+              cancel
+            </Button>
+          </>
+        )}
+        {confirmStatus && (
+          <LoadingButton
+            className={classes.submitButton}
+            variant="contained"
+            endIcon={<SendIcon />}
+            loading={true}
+            loadingPosition="end"
+          >
+            Pending ...
+          </LoadingButton>
+        )}
       </TabsUnstyled>
+
+      {confirmStatus && (
+        <Box className={classes.popup}>
+          <Typography className={classes.popupContent}>
+            {transferredStatus
+              ? transferredNoti[direction]
+              : confirmedNoti[direction]}
+          </Typography>
+          <Container className={classes.popupButtonWrap}>
+            <Button
+              variant="contained"
+              disabled={transferredStatus}
+              onClick={handleTransferredButtonClick}
+            >
+              {direction === 'buy' ? 'unlock' : 'transferred'}
+            </Button>
+            <Button variant="contained" color="error">
+              Complain
+            </Button>
+          </Container>
+        </Box>
+      )}
     </Box>
   );
+};
+
+const confirmedNoti: any = {
+  buy: 'Waiting buyer confirm transferred to your bank !',
+  sell: 'If you transferred your money to seller of bank, please select transferred button !',
+};
+
+const transferredNoti: any = {
+  buy: 'If buyer transferred your money to seller of bank, please unlock USDT for buyer',
+  sell: 'Waiting seller unlock USDT for you, if seller dont unlock, please select complain button',
 };
 
 const useStyles = makeStyles({
@@ -139,7 +214,6 @@ const useStyles = makeStyles({
     marginTop: '2rem',
 
     padding: '0.5rem 0rem',
-
     width: '100%',
   },
 
@@ -150,6 +224,34 @@ const useStyles = makeStyles({
     padding: '0.5rem 0rem',
 
     width: '100%',
+  },
+
+  orderContent: {
+    color: '#898989',
+    textIndent: '0.5rem',
+  },
+
+  popup: {
+    position: 'absolute',
+    minWidth: '20rem',
+    backgroundColor: '#202020',
+    left: '105%',
+    top: '0%',
+
+    paddingTop: '2rem',
+    paddingBottom: '2rem',
+  },
+
+  popupContent: {
+    color: '#898989',
+    padding: '0.5rem 1.4rem',
+    marginBottom: '2rem',
+  },
+
+  popupButtonWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 
