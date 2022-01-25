@@ -22,6 +22,7 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 
 import MakeP2pOrder from './makeP2pOrder';
 import P2pTable from './p2pTable';
+import OrderDetail from './orderDetail';
 
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { makeStyles } from '@mui/styles';
@@ -32,23 +33,35 @@ const P2pMain: FC = () => {
 
   const [makeP2pOrderActive, setP2pOrderActive] = useState(false);
   const [tableActive, setTableActive] = useState(true);
+  const [orderDetailActive, setOrderDetailActive] = useState(false);
+  const [orderDetai, setOrderDetail] = useState();
+
+  // Event handle
 
   const handleMakeP2pOrderButtonClick = (newStatus: any) => {
     setP2pOrderActive(newStatus);
     setTableActive(false);
   };
 
-  const p2pTableProps: any = {
-    //properties
-    handleMakeP2pOrderButtonClick: handleMakeP2pOrderButtonClick,
-    //etc...
-  };
-
   const handleSubmitP2pOrderButtonClick = () => {};
 
   const handleCancleP2pOrderButtonClick = () => {
     setP2pOrderActive(false);
+    setOrderDetailActive(false);
     setTableActive(true);
+  };
+
+  const handleOrderTableButton = (newOrderDetail: any) => {
+    setTableActive(false);
+    setOrderDetailActive(true);
+    setOrderDetail(newOrderDetail);
+  };
+
+  // Component props
+
+  const p2pTableProps: any = {
+    handleMakeP2pOrderButtonClick: handleMakeP2pOrderButtonClick,
+    handleOrderTableButton: handleOrderTableButton,
   };
 
   const makeP2pOrderProps: any = {
@@ -58,10 +71,16 @@ const P2pMain: FC = () => {
     //etc...
   };
 
+  const orderDetailProps: any = {
+    orderDetail: orderDetai,
+    handleCancleP2pOrderButtonClick: handleCancleP2pOrderButtonClick,
+  };
+
   return (
     <Box className={classes.root} sx={{ width: '100%', py: 8 }}>
       {tableActive && <P2pTable {...p2pTableProps} />}
       {makeP2pOrderActive && <MakeP2pOrder {...makeP2pOrderProps} />}
+      {orderDetailActive && <OrderDetail {...orderDetailProps} />}
     </Box>
   );
 };

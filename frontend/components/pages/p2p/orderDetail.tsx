@@ -10,7 +10,6 @@ import {
   FormLabel,
   Input,
   InputAdornment,
-  TextField,
   Typography,
   ButtonGroup,
 } from '@mui/material';
@@ -23,146 +22,55 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { makeStyles } from '@mui/styles';
 
-const MakeP2pOrder: FC = (props: any) => {
-  const { handleCancleP2pOrderButtonClick } = props;
+const OrderDetail: FC = (props: any) => {
+  const { handleCancleP2pOrderButtonClick, orderDetail } = props;
   const { t } = useTranslate();
   const classes = useStyles();
-  const [direction, setDirection] = useState('buy');
-  const [p2pOrder, setp2pOrder] = useState({
-    VNDquantity: 0,
-    USDTquantity: 0,
-    paymentMethod: '',
-    bankCardId: '',
-    phoneNumber: '',
-    note: '',
-  });
 
-  const handleDirectionChange = (event: any) => {
-    const newDirection = event.target.textContent.toLowerCase();
-    setDirection(newDirection);
-  };
-
-  const handleP2pOrderChange = (event: any) => {
-    const { name, value } = event.target;
-    if (value >= 0 && name === 'VNDquantity') {
-      setp2pOrder({
-        ...p2pOrder,
-        VNDquantity: value,
-        USDTquantity: parseFloat((value / 24000).toFixed(2)),
-      });
-    }
-
-    if (value >= 0 && name === 'USDTquantity') {
-      setp2pOrder({
-        ...p2pOrder,
-        VNDquantity: value * 24000,
-        USDTquantity: value,
-      });
-    }
-
-    if (name !== 'USDTquantity' && name !== 'VNDquantity') {
-      setp2pOrder({
-        ...p2pOrder,
-        [name]: value,
-      });
-    }
-  };
-
+  console.log(orderDetail);
   const {
-    VNDquantity,
-    USDTquantity,
+    USDTQuantity,
+    VNDQuantity,
     paymentMethod,
     bankCardId,
+    direction,
     phoneNumber,
     note,
-  } = p2pOrder;
-
-  const handleMakeOfferClick = (event: any) => {
-    console.log(VNDquantity, USDTquantity);
-  };
+  } = orderDetail;
 
   return (
     <Box className={classes.root} sx={{ width: '100%', py: 8 }}>
-      <TabsUnstyled defaultValue="buy" onChange={handleDirectionChange}>
+      <TabsUnstyled>
         <TabsList>
-          <Tab value="buy">Buy</Tab>
-          <Tab value="sell">Sell</Tab>
+          <Tab>Order Detail</Tab>
         </TabsList>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>VND</label>
-          <TextField
-            size="medium"
-            type="number"
-            className={classes.input}
-            label="VND"
-            value={VNDquantity}
-            name="VNDquantity"
-            onChange={handleP2pOrderChange}
-          />
+          <Typography>{VNDQuantity} - VND</Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>USDT</label>
-          <TextField
-            size="medium"
-            type="number"
-            className={classes.input}
-            label="USDT"
-            value={USDTquantity}
-            name="USDTquantity"
-            onChange={handleP2pOrderChange}
-          />
+          <Typography>{USDTQuantity} $</Typography>
         </Box>
 
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Payment method</label>
-          <TextField
-            size="medium"
-            className={classes.input}
-            value={paymentMethod}
-            name="paymentMethod"
-            onChange={handleP2pOrderChange}
-            label="Payment"
-          />
+          <Typography>{paymentMethod}</Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Bank Card ID</label>
-          <TextField
-            size="medium"
-            className={classes.input}
-            value={bankCardId}
-            name="bankCardId"
-            onChange={handleP2pOrderChange}
-            label="Card ID"
-          />
+          <Typography>{bankCardId}</Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Phone number</label>
-          <TextField
-            size="medium"
-            className={classes.input}
-            value={phoneNumber}
-            name="phoneNumber"
-            onChange={handleP2pOrderChange}
-            label="Phone"
-          />
+          <Typography>{phoneNumber}</Typography>
         </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Note</label>
-          <TextField
-            size="medium"
-            className={classes.input}
-            value={note}
-            name="note"
-            onChange={handleP2pOrderChange}
-            label="note"
-          />
+          <Typography>{note}</Typography>
         </Box>
-        <Button
-          onClick={handleMakeOfferClick}
-          className={classes.submitButton}
-          variant="contained"
-        >
-          Make Order
+        <Button className={classes.submitButton} variant="contained">
+          Confirm
         </Button>
         <Button
           onClick={handleCancleP2pOrderButtonClick}
@@ -267,11 +175,6 @@ const Tab = styled(TabUnstyled)`
   border-radius: 5px;
   display: flex;
   justify-content: center;
-
-  &.${tabUnstyledClasses.selected} {
-    background-color: ${(props: any) =>
-      props.value === 'buy' ? color['buy'] : color['sell']};
-  }
 `;
 
 const TabPanel = styled(TabPanelUnstyled)`
@@ -291,4 +194,4 @@ const TabsList = styled(TabsListUnstyled)`
   margin-bottom: '1rem';
 `;
 
-export default MakeP2pOrder;
+export default OrderDetail;

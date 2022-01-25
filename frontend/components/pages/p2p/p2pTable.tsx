@@ -28,7 +28,7 @@ import { ChangeEvent, FC, useMemo, useState } from 'react';
 import { Search } from 'react-feather';
 
 const P2pTable: FC = (props: any) => {
-  const { handleMakeP2pOrderButtonClick } = props;
+  const { handleMakeP2pOrderButtonClick, handleOrderTableButton } = props;
   const { t } = useTranslate();
   const theme = useTheme();
   const p2pLists: any = [
@@ -37,24 +37,30 @@ const P2pTable: FC = (props: any) => {
       USDTQuantity: 10,
       VNDQuantity: 240000,
       paymentMethod: 'Vietinbank',
-      bandCardId: 1009383303,
+      bankCardId: '1009383303',
       direction: 'buy',
+      phoneNumber: '09878239283',
+      note: '',
     },
     {
       name: 'Goku',
       USDTQuantity: 20,
       VNDQuantity: 480000,
       paymentMethod: 'Techcombank',
-      bandCardId: 1009383303,
+      bankCardId: '1009383303',
       direction: 'buy',
+      phoneNumber: '09878239283',
+      note: 'n',
     },
     {
       name: 'Kaneki',
       USDTQuantity: 10,
       VNDQuantity: 240000,
       paymentMethod: 'Tpbank',
-      bandCardId: 1009383303,
-      direction: 'Sell',
+      bankCardId: '1009383303',
+      direction: 'sell',
+      phoneNumber: '09878239283',
+      note: 'if you want to buy, call me with phone: 09878239283',
     },
   ];
 
@@ -130,10 +136,11 @@ const P2pTable: FC = (props: any) => {
                     <TableCell align="left">
                       <Button
                         variant="contained"
-                        color={item.direction === 'buy' ? 'success' : 'error'}
+                        color={item.direction === 'buy' ? 'error' : 'success'}
                         sx={{ color: 'white' }}
+                        onClick={() => handleOrderTableButton(item)}
                       >
-                        {item.direction}
+                        {item.direction === 'buy' ? 'sell' : 'buy'}
                       </Button>
                     </TableCell>
                   </TableRow>
