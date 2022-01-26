@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import TradingView from '@components/pages/trade/TradingView';
 import OrderBooks from '@components/pages/trade/OrderBooks';
 import MakeOrder from '@components/pages/trade/MakeOrder';

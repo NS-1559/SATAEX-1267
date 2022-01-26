@@ -33,7 +33,7 @@ const OrderTable: FC = () => {
   const dataTable: any = createTable([], true);
 
   return (
-    <Box sx={{ width: '100%', paddingTop: 0, py: 8, maxWidth: 1600 }}>
+    <Box sx={{ width: '100%', paddingTop: 0, maxWidth: 1600 }}>
       <TableContainer className={classes.root} component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
