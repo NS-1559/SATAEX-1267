@@ -122,6 +122,14 @@ const Header: FC = () => {
         </Box>
         <Box sx={{ display: 'flex' }}>
           <Link
+            href="/assets"
+            className={`${classes.navLink} ${classes.actionButton}`}
+          >
+            <Typography className={classes.actionButtonText}>
+              {t('app.header.assets')}
+            </Typography>
+          </Link>
+          <Link
             href="/auth/login"
             className={`${classes.navLink} ${classes.actionButton}`}
           >
