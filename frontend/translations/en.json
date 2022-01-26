@@ -5,6 +5,8 @@
   "app.header.buy-crypto": "buy crypto",
   "app.header.markets": "markets",
   "app.header.trade": "spot",
+  "app.header.assets": "assets",
+  "app.header.p2p": "P2P",
   "app.header.logIn": "log in",
   "app.header.signUp": "Sign up",
   "app.header.en": "EN",
@@ -97,7 +99,5 @@
   "app.markets.24h-volume": "24H Volume(USD)",
   "app.markets.chart": "Chart",
   "app.markets.trade-button": "Trade",
-  "app.markets.view-more-button": "View more",
-
-  "app.header.p2p": "P2P"
+  "app.markets.view-more-button": "View more"
 }
