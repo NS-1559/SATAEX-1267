@@ -3,18 +3,18 @@ import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
 import { Box } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
-import AdminMain from '@components/pages/admin/AdminMain';
+import AdminLogin from '@components/pages/admin/AdminLogin';
 
-const Admin: NextPage = () => {
+const Login: NextPage = () => {
   const { t } = useTranslate();
 
   const classes = useStyles();
 
   return (
     <>
-      <Seo title={t('app.admin.title')} />
+      <Seo title={t('app.admin-login.title')} />
       <Box className={classes.main}>
-        <AdminMain />
+        <AdminLogin />
       </Box>
     </>
   );
@@ -31,4 +31,4 @@ const useStyles = makeStyles({
   },
 });
 
-export default Admin;
+export default Login;

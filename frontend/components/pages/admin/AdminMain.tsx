@@ -3,6 +3,11 @@ import { useTranslate } from '@app/hooks/translate';
 import { Coin } from '@models/Coin';
 import { useTheme } from '@mui/material/styles';
 import { ChangeEvent, FC, useMemo, useState } from 'react';
+
+import * as React from 'react';
+
+import jsonServerProvider from 'ra-data-json-server';
+
 import {
   Box,
   Button,
@@ -21,11 +26,7 @@ const AdminMain: FC = () => {
   const { t } = useTranslate();
   const classes = useStyles();
 
-  return (
-    <Box className={classes.root} sx={{ width: '100%' }}>
-      Xin chao admin
-    </Box>
-  );
+  return <Box>a</Box>;
 };
 
 const useStyles = makeStyles({
