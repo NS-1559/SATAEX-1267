@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Transactions from './Transactions';
 import { useTheme } from '@mui/material/styles';
+import PieChartCustom from '../Chart/PieChartCustom';
 
 const Dashboard: FC = () => {
   const theme = useTheme();
@@ -137,10 +138,10 @@ const Dashboard: FC = () => {
           </Grid>
           {/* Recent Transactions */}
 
-          <Grid item xs={12}>
-            <Paper
-              sx={{ p: 2, display: 'flex', flexDirection: 'column' }}
-            ></Paper>
+          <Grid item xs={6}>
+            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+              <PieChartCustom />
+            </Paper>
           </Grid>
         </Grid>
       </Container>
