@@ -22,7 +22,7 @@ import {
 
 import { makeStyles } from '@mui/styles';
 
-const AdminMain: FC = () => {
+const TokenDetail: FC = () => {
   const { t } = useTranslate();
   const classes = useStyles();
 
@@ -33,4 +33,4 @@ const useStyles = makeStyles({
   root: {},
 });
 
-export default AdminMain;
+export default TokenDetail;
