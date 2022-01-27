@@ -3,7 +3,7 @@ import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
 import { Box } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
-import Dashboard from '@components/pages/admin/Dashboard/Dashboard';
+import AdminMain from '@components/pages/admin/Dashboard/AdminMain';
 const Admin: NextPage = () => {
   const { t } = useTranslate();
 
@@ -13,7 +13,7 @@ const Admin: NextPage = () => {
     <>
       <Seo title={t('app.admin.title')} />
       <Box className={classes.main}>
-        <Dashboard />
+        <AdminMain />
       </Box>
     </>
   );
@@ -22,7 +22,7 @@ const Admin: NextPage = () => {
 const useStyles = makeStyles({
   main: {
     position: 'fixed',
-    backgroundColor: 'white',
+    backgroundColor: '#0c1a32',
     height: '100%',
     width: '100%',
     top: '0%',
