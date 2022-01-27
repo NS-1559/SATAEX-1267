@@ -27,6 +27,7 @@ import Dashboard from './Dashboard';
 import Users from './Users';
 import Tokens from './Tokens';
 import Transactions from './Transactions';
+import TokenDetail from './TokenDetail';
 
 const drawerWidth: number = 240;
 
@@ -80,20 +81,41 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
+const titles = {
+  0: 'Dashboard',
+  1: 'Tokens',
+  2: 'Users',
+  3: 'Transactions',
+  4: 'Token Detail',
+};
+
 function AdminMain() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const [tabStatus, setTabStatus] = useState(0); // 0 - dashboard, 1 - Tokens, 2 - Users,  3 - Transactions
+  const [tabStatus, setTabStatus] = useState(0); // 0 - dashboard, 1 - Tokens, 2 - Users,  3 - Transactions, 4 - TokenDetail
+  const [tokenSymbol, setTokenSymbol] = useState();
 
-  const handleMenuClick = (nextTab: number) => {
+  const handleChangeStatus = (nextTab: number, nextTokenSymbol: any) => {
     setTabStatus(nextTab);
+
+    if (nextTokenSymbol) {
+      setTokenSymbol(nextTokenSymbol);
+    }
   };
 
   const MenuProps = {
-    handleMenuClick: handleMenuClick,
+    handleChangeStatus: handleChangeStatus,
+  };
+
+  const TokensComponentProps = {
+    handleChangeStatus: handleChangeStatus,
+  };
+
+  const TokenDetailComponentProps = {
+    tokenSymbol,
   };
 
   return (
@@ -125,7 +147,7 @@ function AdminMain() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {titles[tabStatus]}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -156,9 +178,10 @@ function AdminMain() {
         {/* Content */}
 
         {tabStatus === 0 && <Dashboard />}
-        {tabStatus === 1 && <Tokens />}
+        {tabStatus === 1 && <Tokens {...TokensComponentProps} />}
         {tabStatus === 2 && <Users />}
         {tabStatus === 3 && <Transactions />}
+        {tabStatus === 4 && <TokenDetail {...TokenDetailComponentProps} />}
       </Box>
     </ThemeProvider>
   );

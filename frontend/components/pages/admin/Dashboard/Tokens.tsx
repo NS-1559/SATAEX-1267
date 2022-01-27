@@ -27,9 +27,11 @@ import Image from 'next/image';
 import { ChangeEvent, FC, useMemo, useState } from 'react';
 import { Search } from 'react-feather';
 
-const Tokens: FC = () => {
+export default function Tokens(props: any) {
   const { t } = useTranslate();
   const theme = useTheme();
+  const { handleChangeStatus } = props;
+
   const tokens = useAppSelector((state) => {
     return state.common.coins.data;
   });
@@ -52,7 +54,9 @@ const Tokens: FC = () => {
   };
 
   //
-  const handleEditButtonClick = () => {};
+  const handleEditButtonClick = (number: any, tokenSymbol: any) => {
+    handleChangeStatus(number, tokenSymbol);
+  };
 
   const handleRemoveButtonClick = () => {};
 
@@ -182,6 +186,7 @@ const Tokens: FC = () => {
                         variant="contained"
                         color="primary"
                         sx={{ color: 'white', width: '6rem' }}
+                        onClick={() => handleEditButtonClick(4, coin.symbol)}
                       >
                         Edit
                       </Button>
@@ -211,6 +216,4 @@ const Tokens: FC = () => {
       </Container>
     </Box>
   );
-};
-
-export default Tokens;
+}

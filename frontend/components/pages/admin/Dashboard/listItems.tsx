@@ -10,28 +10,28 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import TokenIcon from '@mui/icons-material/Token';
 
 export default function mainListItems(props: any) {
-  const { handleMenuClick } = props;
+  const { handleChangeStatus } = props;
   return (
     <div>
-      <ListItem button onClick={() => handleMenuClick(0)}>
+      <ListItem button onClick={() => handleChangeStatus(0)}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItem>
-      <ListItem button onClick={() => handleMenuClick(1)}>
+      <ListItem button onClick={() => handleChangeStatus(1)}>
         <ListItemIcon>
           <TokenIcon />
         </ListItemIcon>
         <ListItemText primary="Tokens" />
       </ListItem>
-      <ListItem button onClick={() => handleMenuClick(2)}>
+      <ListItem button onClick={() => handleChangeStatus(2)}>
         <ListItemIcon>
           <PersonIcon />
         </ListItemIcon>
         <ListItemText primary="Users" />
       </ListItem>
-      <ListItem button onClick={() => handleMenuClick(3)}>
+      <ListItem button onClick={() => handleChangeStatus(3)}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
