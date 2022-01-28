@@ -35,104 +35,66 @@ export default function TokenDetail(props: any) {
       <Grid item xs={8} mt={10} ml={2}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           <Typography variant="h6" gutterBottom>
-            Shipping address
+            Token Info
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
-                id="firstName"
-                name="firstName"
-                label="First name"
+                id="name"
+                name="name"
+                label="Token Name"
                 fullWidth
-                autoComplete="given-name"
                 variant="standard"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
-                id="lastName"
-                name="lastName"
-                label="Last name"
+                id="tokenSymbol"
+                name="tokenSymbol"
+                label="Token Symbol"
                 fullWidth
-                autoComplete="family-name"
                 variant="standard"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
-                id="address1"
-                name="address1"
-                label="Address line 1"
+                id="contract"
+                name="contract"
+                label="Token Contract"
                 fullWidth
-                autoComplete="shipping address-line1"
                 variant="standard"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="address2"
-                name="address2"
-                label="Address line 2"
+                id="tokenType"
+                name="tokenType"
+                label="Token Type"
                 fullWidth
-                autoComplete="shipping address-line2"
                 variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
+                placeholder="BSC or ERC20"
                 required
-                id="city"
-                name="city"
-                label="City"
-                fullWidth
-                autoComplete="shipping address-level2"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="state"
-                name="state"
-                label="State/Province/Region"
-                fullWidth
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="zip"
-                name="zip"
-                label="Zip / Postal code"
-                fullWidth
-                autoComplete="shipping postal-code"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                id="country"
-                name="country"
-                label="Country"
-                fullWidth
-                autoComplete="shipping country"
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox color="secondary" name="saveAddress" value="yes" />
-                }
-                label="Use this address for payment details"
               />
             </Grid>
           </Grid>
         </Paper>
+        <Button
+          variant="contained"
+          color="success"
+          sx={{ color: 'white', mt: 2, width: '8rem', mr: 2 }}
+        >
+          Confirm
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          sx={{ color: 'white', mt: 2, width: '8rem' }}
+        >
+          Cancel
+        </Button>
       </Grid>
     </Box>
   );
