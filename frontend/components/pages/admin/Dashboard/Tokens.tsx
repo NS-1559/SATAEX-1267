@@ -3,7 +3,6 @@ import { useTranslate } from '@app/hooks/translate';
 
 import axios from 'axios';
 
-import { Coin } from '@models/Coin';
 import {
   Box,
   Button,
@@ -55,13 +54,10 @@ export default function Tokens(props: any) {
                 if(data[i].symbol.toLowerCase() === tokens[j].symbol) newTopTokens.push(tokens[j]);
               }
             }
-            console.log(data);
             setTopTokens(newTopTokens);
         });
   }, []);
 
-
-  console.log(topTokens);
 
   const displayTokens = useMemo(() => {
     return topTokens;

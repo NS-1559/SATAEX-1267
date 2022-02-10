@@ -97,8 +97,6 @@ export default function Users() {
           });
     },[]);
 
-  console.log(users);
-
   return (
     <Grid item xs={8} mt={10} ml={2}>
       <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
