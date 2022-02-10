@@ -28,6 +28,8 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'address' => $this->faker->address(),
             'phone_number' => $this->faker->phoneNumber(),
+            'api_key' => NULL,
+            'secret_key' => NULL,
         ];
     }
 }
