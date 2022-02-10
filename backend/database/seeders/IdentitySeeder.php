@@ -15,20 +15,20 @@ class IdentitySeeder extends Seeder
      */
 
     public function run()
-    {  
+    {
         foreach (User::all() as $user) {
             if (!strcmp($user->last_name, 'EX1')) {
                 Identity::factory()->create([
                     'user_id' => $user->id,
                     'email' => 'admin@gmail.com',
-                    'password' => bcrypt('123456'),
+                    'password' => bcrypt('admin123456'),
                     'role' => 'ADMIN'
                 ]);
             } elseif (!strcmp($user->last_name, 'EX2')) {
                 Identity::factory()->create([
                     'user_id' => $user->id,
                     'email' => 'user@gmail.com',
-                    'password' => bcrypt('123456'),
+                    'password' => bcrypt('user123456'),
                     'role' => 'USER'
                 ]);
             } else {

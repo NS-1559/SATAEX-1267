@@ -14,6 +14,21 @@ class AssetSeeder extends Seeder
      */
     public function run()
     {
-        Asset::factory()->count(20)->create();
+        // BTC
+        Asset::factory()->create([
+            'name' => 'Bitcoin',
+            'type' => 'BSC',
+            'symbol' => 'BTC',
+        ]);
+
+        // ETH
+        Asset::factory()->create([
+            'name' => 'Etherium',
+            'type' => 'TRC20',
+            'symbol' => 'ETH',
+        ]);
+
+        // Asset::factory()->count(18)->create();
+
     }
 }
