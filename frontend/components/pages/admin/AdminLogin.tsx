@@ -1,5 +1,8 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
+import { FC, useEffect } from 'react';
+import { useTranslate } from '@app/hooks/translate';
+import { commonActions } from '@app/store/common/commonSlice';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,19 +15,53 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useAppDispatch, useAppSelector } from '@app/hooks/redux';
+import { loginThunk } from '@app/store/auth/sliceThunks';
+import { push } from 'connected-next-router';
+
+
 
 const theme = createTheme();
 
 export default function Login() {
+
+  const { t } = useTranslate();
+  const dispatch = useAppDispatch();
+  const loginState = useAppSelector((state) => state.auth.login);
+
+  useEffect(() => {
+    if (loginState.error) {
+      dispatch(
+        commonActions.openToast({
+          message: t('app.login.fail-message'),
+          type: 'error',
+        }),
+      );
+    }
+  }, [dispatch, loginState.error, t]);
+
+
+  useEffect(() => {
+    if (loginState.isLogin) {
+      dispatch(push('/admin'));
+    }
+  }, [dispatch, loginState.isLogin]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+    const formValues:any = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+
+    dispatch(loginThunk(formValues));
+    console.log(formValues)
   };
+
+  
+
+  
 
   return (
     <ThemeProvider theme={theme}>
