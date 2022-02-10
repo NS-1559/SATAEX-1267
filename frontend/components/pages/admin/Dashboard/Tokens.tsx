@@ -1,5 +1,8 @@
 import { useAppSelector } from '@app/hooks/redux';
 import { useTranslate } from '@app/hooks/translate';
+
+import axios from 'axios';
+
 import { Coin } from '@models/Coin';
 import {
   Box,
@@ -24,7 +27,7 @@ import {
   formatPriceChange,
 } from '@utils/price';
 import Image from 'next/image';
-import { ChangeEvent, FC, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
 import { Search } from 'react-feather';
 
 export default function Tokens(props: any) {
@@ -35,16 +38,32 @@ export default function Tokens(props: any) {
   const tokens = useAppSelector((state) => {
     return state.common.coins.data;
   });
-  const topTokens = tokens.slice(0, 6);
+
+
+  const [topTokens, setTopTokens] = useState(tokens);
+
   const [keyword, setKeyword] = useState('');
 
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/asset')
+        .then((response: any) => {
+            const newTopTokens = [];
+            const data = response.data;
+            for(let i = 0; i < data.length; i++){
+              for(let j = 0; j < tokens.length; j++ ){
+                if(data[i].symbol.toLowerCase() === tokens[j].symbol) newTopTokens.push(tokens[j]);
+              }
+            }
+            console.log(data);
+            setTopTokens(newTopTokens);
+        });
+  }, []);
+
+
+  console.log(topTokens);
+
   const displayTokens = useMemo(() => {
-    if (keyword)
-      return tokens.filter(
-        (item: Coin) =>
-          item.name.toLowerCase().includes(keyword) ||
-          item.symbol.toLowerCase().includes(keyword),
-      );
     return topTokens;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, topTokens]);
@@ -65,34 +84,7 @@ export default function Tokens(props: any) {
   return (
     <Box sx={{ width: '100%', py: 8, mt: 4 }}>
       <Container>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 5,
-          }}
-        >
-          <Typography
-            color="common.white"
-            variant="h4"
-            sx={{ fontWeight: 'medium' }}
-            mt={4}
-          ></Typography>
-          <TextField
-            variant="outlined"
-            size="small"
-            placeholder={t('app.markets.search')}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search size={20} />
-                </InputAdornment>
-              ),
-            }}
-            onChange={onKeywordChange}
-          />
-        </Box>
+        
         <Paper
           elevation={0}
           sx={{
@@ -123,7 +115,7 @@ export default function Tokens(props: any) {
               <TableBody>
                 {displayTokens.map((coin, index) => (
                   <TableRow
-                    key={index}
+                    key={coin.symbol}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row" sx={{ pl: 10 }}>
