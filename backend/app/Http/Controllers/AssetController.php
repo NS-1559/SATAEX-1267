@@ -37,7 +37,7 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Asset::factory()->create($request->all());
     }
 
     /**
@@ -46,9 +46,9 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($coin)
     {
-        //
+        return Asset::where('name', $coin)->first();
     }
 
     /**
@@ -69,9 +69,9 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $coin)
     {
-        //
+        Asset::where('name', $coin)->update($request->all());
     }
 
     /**
@@ -80,8 +80,11 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($coin)
     {
-        //
+        Asset::where('name', $coin)->delete();
+        return response()->json([
+            'success' => 'Record has been deleted successfully!',
+        ]);
     }
 }

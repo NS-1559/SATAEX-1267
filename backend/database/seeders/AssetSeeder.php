@@ -23,7 +23,7 @@ class AssetSeeder extends Seeder
 
         // ETH
         Asset::factory()->create([
-            'name' => 'Etherium',
+            'name' => 'Ethereum',
             'type' => 'TRC20',
             'symbol' => 'ETH',
         ]);
