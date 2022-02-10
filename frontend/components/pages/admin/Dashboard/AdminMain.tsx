@@ -96,13 +96,13 @@ function AdminMain() {
   };
 
   const [tabStatus, setTabStatus] = useState(0); // 0 - dashboard, 1 - Tokens, 2 - Users,  3 - Transactions, 4 - TokenDetail
-  const [tokenSymbol, setTokenSymbol] = useState();
+  const [token, setToken] = useState();
 
-  const handleChangeStatus = (nextTab: number, nextTokenSymbol: any) => {
+  const handleChangeStatus = (nextTab: number, nextToken: any) => {
     setTabStatus(nextTab);
 
-    if (nextTokenSymbol) {
-      setTokenSymbol(nextTokenSymbol);
+    if (nextToken) {
+      setToken(nextToken);
     }
   };
 
@@ -115,7 +115,8 @@ function AdminMain() {
   };
 
   const TokenDetailComponentProps = {
-    tokenSymbol,
+    token,
+    handleChangeStatus
   };
 
   return (

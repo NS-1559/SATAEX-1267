@@ -2,16 +2,15 @@ import { useAppSelector } from '@app/hooks/redux';
 import { useTranslate } from '@app/hooks/translate';
 import { Coin } from '@models/Coin';
 import { useTheme } from '@mui/material/styles';
-import { ChangeEvent, FC, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
 
-import jsonServerProvider from 'ra-data-json-server';
+
 
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import axios from 'axios';
 
 import {
   Box,
@@ -26,9 +25,35 @@ import {
 import { makeStyles } from '@mui/styles';
 
 export default function TokenDetail(props: any) {
-  const { tokenSymbol } = props;
-  const { t } = useTranslate();
-  const classes = useStyles();
+  const { token, handleChangeStatus } = props;
+
+  const [tokenDetail, setTokenDetail] = useState(token);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/asset')
+        .then((response: any) => {
+           
+        });
+  }, []);
+
+  const handleTokenDetailChange = (event: any) => {
+    const { name, value } = event.target;
+      setTokenDetail({
+        ...tokenDetail,
+        [name]:value
+      });
+  };
+
+  const handleSubmit = (event: any) =>{
+    const newToken = {
+      name: token.name,
+      symbol: token.symbol
+    }
+
+
+    // post to server new token here
+    console.log(newToken);
+  }
 
   return (
     <Box>
@@ -46,37 +71,21 @@ export default function TokenDetail(props: any) {
                 label="Token Name"
                 fullWidth
                 variant="standard"
+                value={tokenDetail.name}
+                onChange={handleTokenDetailChange}
+
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
                 id="tokenSymbol"
-                name="tokenSymbol"
+                name="symbol"
                 label="Token Symbol"
                 fullWidth
                 variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="contract"
-                name="contract"
-                label="Token Contract"
-                fullWidth
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                id="tokenType"
-                name="tokenType"
-                label="Token Type"
-                fullWidth
-                variant="standard"
-                placeholder="BSC or ERC20"
-                required
+                value={tokenDetail.symbol.toUpperCase()}
+                onChange={handleTokenDetailChange}
               />
             </Grid>
           </Grid>
@@ -85,13 +94,16 @@ export default function TokenDetail(props: any) {
           variant="contained"
           color="success"
           sx={{ color: 'white', mt: 2, width: '8rem', mr: 2 }}
+          onClick={handleSubmit}
         >
           Confirm
+          
         </Button>
         <Button
           variant="contained"
           color="error"
           sx={{ color: 'white', mt: 2, width: '8rem' }}
+          onClick={() => handleChangeStatus(1, null)}
         >
           Cancel
         </Button>

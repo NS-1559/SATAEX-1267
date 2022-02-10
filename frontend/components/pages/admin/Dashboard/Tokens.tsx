@@ -69,13 +69,14 @@ export default function Tokens(props: any) {
   };
 
   //
-  const handleEditButtonClick = (number: any, tokenSymbol: any) => {
-    handleChangeStatus(number, tokenSymbol);
+  const handleEditButtonClick = (number: any, token: any) => {
+    handleChangeStatus(number, token);
   };
 
-  const handleRemoveButtonClick = () => {};
+  const handleRemoveButtonClick = (coin:any) => {
+    // delete token here
+  };
 
-  const handeAddTokenButtonClick = () => {};
 
   return (
     <Box sx={{ width: '100%', py: 8, mt: 4 }}>
@@ -174,7 +175,7 @@ export default function Tokens(props: any) {
                         variant="contained"
                         color="primary"
                         sx={{ color: 'white', width: '6rem' }}
-                        onClick={() => handleEditButtonClick(4, coin.symbol)}
+                        onClick={() => handleEditButtonClick(4, coin)}
                       >
                         Edit
                       </Button>
@@ -184,6 +185,7 @@ export default function Tokens(props: any) {
                         variant="contained"
                         color="error"
                         sx={{ color: 'white' }}
+                        onClick={() => handleRemoveButtonClick(coin)}
                       >
                         remove
                       </Button>
@@ -198,6 +200,7 @@ export default function Tokens(props: any) {
           variant="contained"
           color="warning"
           sx={{ color: 'white', mt: 2, width: '8rem' }}
+          onClick={() => handleEditButtonClick(4, {name: 'undefine', symbol: 'undefine'})}
         >
           Add Token
         </Button>
