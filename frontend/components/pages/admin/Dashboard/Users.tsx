@@ -7,6 +7,10 @@ import Grid from '@mui/material/Grid';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
+import axios from 'axios';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }: { theme: any }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -83,6 +87,18 @@ const rows = [
 ];
 
 export default function Users() {
+  const  [users, setUsers] = useState(rows);
+
+  useEffect(() => {
+      axios.get('http://127.0.0.1:8000/api/users')
+          .then((response: any) => {
+              const data = response.data;
+              setUsers(data);
+          });
+    },[]);
+
+  console.log(users);
+
   return (
     <Grid item xs={8} mt={10} ml={2}>
       <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
@@ -93,21 +109,17 @@ export default function Users() {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="left">Phone</StyledTableCell>
               <StyledTableCell align="left">Address</StyledTableCell>
-              <StyledTableCell align="left">Email</StyledTableCell>
-              <StyledTableCell align="right">Balance</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {users.map((row:any) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell component="th" scope="row">
                   {row.id}
                 </StyledTableCell>
-                <StyledTableCell align="left">{row.name}</StyledTableCell>
-                <StyledTableCell align="left">{row.phone}</StyledTableCell>
+                <StyledTableCell align="left">{row.first_name + row.last_name}</StyledTableCell>
+                <StyledTableCell align="left">{row.phone_number}</StyledTableCell>
                 <StyledTableCell align="left">{row.address}</StyledTableCell>
-                <StyledTableCell align="left">{row.email}</StyledTableCell>
-                <StyledTableCell align="right">{row.balance} $</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
