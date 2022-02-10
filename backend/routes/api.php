@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
@@ -21,7 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/asset', [AssetController::class, 'getAllAssets']);
+Route::resource('orders', OrderController::class);
+Route::resource('asset', AssetController::class);
 Route::resource('users', UserController::class);
 
 Route::group([

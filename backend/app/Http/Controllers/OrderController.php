@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Asset;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class AssetController extends Controller
+class OrderController extends Controller
 {
-    // public function __construct() {
-    //     $this->middleware('auth:api');
-    // }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +13,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        return Asset::all();
+        return Order::all();
     }
 
     /**
