@@ -13,6 +13,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -177,6 +180,14 @@ const top100Films = [
 
 const Assets: NextPage = () => {
   const { t } = useTranslate();
+  const router = useRouter();
+  const token = Cookies.get('token');
+
+  useEffect(() => {
+    if (!token) {
+      router.push('vi/auth/login');
+    }
+  }, []);
 
   const options = top100Films.map((option) => {
     const firstLetter = option.title[0].toUpperCase();
@@ -186,255 +197,259 @@ const Assets: NextPage = () => {
     };
   });
 
-  return (
-    <>
-      <Seo title={t('app.assets.title')} />
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-        }}
-      >
-        <Box sx={{ width: '430px' }}>
-          <Box sx={{ padding: 5 }}>
-            <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
-              Total Equity
-            </Box>
-            <Box
-              sx={{
-                fontSize: 40,
-                fontWeight: 600,
-                marginBottom: 2,
-                display: 'flex',
-                alignItems: 'flex-end',
-              }}
-            >
-              0.00000000
-              <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 2 }}>
-                BTC
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                color: 'rgba(0, 0, 0, 0.4)',
-                fontSize: 14,
-                marginBottom: 2,
-              }}
-            >
-              ≈ 0.00 USD
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button variant="contained" size="small">
-                Deposit
-              </Button>
-              <Button variant="outlined" size="small">
-                Withdraw
-              </Button>
-              <Button variant="outlined" size="small">
-                Transfer
-              </Button>
-            </Box>
-          </Box>
-          <Box sx={{ width: '100%' }}>
-            <Box
-              sx={{
-                width: '100%',
-                backgroundColor: '#f7f7f7',
-                padding: 3,
-                display: 'flex',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
-            >
-              <Box sx={{ marginRight: 2 }}>
-                <Image
-                  src="/images/assets/spot.svg"
-                  alt=""
-                  width={17}
-                  height={17}
-                />
-              </Box>
-              Spot Acount
-            </Box>
-            <Box
-              sx={{
-                width: '100%',
-                padding: 3,
-                display: 'flex',
-                cursor: 'pointer',
-                transition: '0.5s',
-                '&:hover': { backgroundColor: '#f7f7f7' },
-              }}
-            >
-              <Box sx={{ marginRight: 2 }}>
-                <Image
-                  src="/images/assets/order.png"
-                  alt=""
-                  width={20}
-                  height={20}
-                />
-              </Box>
-              Order
-            </Box>
-          </Box>
-        </Box>
+  if (token)
+    return (
+      <>
+        <Seo title={t('app.assets.title')} />
         <Box
           sx={{
             width: '100%',
-            backgroundColor: '#f7f7f7',
-            padding: 5,
-            paddingRight: 3,
-            paddingLeft: 3,
+            display: 'flex',
           }}
         >
-          <Box
-            sx={{
-              padding: 3,
-              width: 450,
-              backgroundImage: 'linear-gradient(90deg, #ffcc6f, #ffb11a)',
-              borderRadius: 3,
-            }}
-          >
-            <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
-              Spot Account
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-              }}
-            >
-              <Box>
-                <Box
-                  sx={{
-                    color: 'rgba(0, 0, 0, 0.4)',
-                    fontSize: 14,
-                  }}
-                >
-                  Total Equity
-                </Box>
-                <Box
-                  sx={{
-                    fontSize: 25,
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                  }}
-                >
-                  0.00000000
-                  <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
-                    BTC
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    color: 'rgba(0, 0, 0, 0.4)',
-                    fontSize: 14,
-                  }}
-                >
-                  ≈ 0.00 USD
+          <Box sx={{ width: '430px' }}>
+            <Box sx={{ padding: 5 }}>
+              <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
+                Total Equity
+              </Box>
+              <Box
+                sx={{
+                  fontSize: 40,
+                  fontWeight: 600,
+                  marginBottom: 2,
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                }}
+              >
+                0.00000000
+                <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 2 }}>
+                  BTC
                 </Box>
               </Box>
-              <Box>
-                <Box
-                  sx={{
-                    color: 'rgba(0, 0, 0, 0.4)',
-                    fontSize: 14,
-                  }}
-                >
-                  Available Balance
+              <Box
+                sx={{
+                  color: 'rgba(0, 0, 0, 0.4)',
+                  fontSize: 14,
+                  marginBottom: 2,
+                }}
+              >
+                ≈ 0.00 USD
+              </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Button variant="contained" size="small">
+                  Deposit
+                </Button>
+                <Button variant="outlined" size="small">
+                  Withdraw
+                </Button>
+                <Button variant="outlined" size="small">
+                  Transfer
+                </Button>
+              </Box>
+            </Box>
+            <Box sx={{ width: '100%' }}>
+              <Box
+                sx={{
+                  width: '100%',
+                  backgroundColor: '#f7f7f7',
+                  padding: 3,
+                  display: 'flex',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                <Box sx={{ marginRight: 2 }}>
+                  <Image
+                    src="/images/assets/spot.svg"
+                    alt=""
+                    width={17}
+                    height={17}
+                  />
                 </Box>
-                <Box
-                  sx={{
-                    fontSize: 25,
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                  }}
-                >
-                  0.00000000
-                  <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
-                    BTC
-                  </Box>
+                Spot Acount
+              </Box>
+              <Box
+                sx={{
+                  width: '100%',
+                  padding: 3,
+                  display: 'flex',
+                  cursor: 'pointer',
+                  transition: '0.5s',
+                  '&:hover': { backgroundColor: '#f7f7f7' },
+                }}
+              >
+                <Box sx={{ marginRight: 2 }}>
+                  <Image
+                    src="/images/assets/order.png"
+                    alt=""
+                    width={20}
+                    height={20}
+                  />
                 </Box>
-                <Box
-                  sx={{
-                    color: 'rgba(0, 0, 0, 0.4)',
-                    fontSize: 14,
-                  }}
-                >
-                  ≈ 0.00 USD
-                </Box>
+                Order
               </Box>
             </Box>
           </Box>
           <Box
             sx={{
-              // height: '100vh',
-              backgroundColor: '#fff',
-              marginTop: 5,
-              borderRadius: 2,
+              width: '100%',
+              backgroundColor: '#f7f7f7',
+              padding: 5,
+              paddingRight: 3,
+              paddingLeft: 3,
             }}
           >
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
                 padding: 3,
+                width: 450,
+                backgroundImage: 'linear-gradient(90deg, #ffcc6f, #ffb11a)',
+                borderRadius: 3,
               }}
             >
-              <Autocomplete
-                id="grouped-demo"
-                options={options.sort(
-                  (a, b) => -b.firstLetter.localeCompare(a.firstLetter),
-                )}
-                groupBy={(option) => option.firstLetter}
-                getOptionLabel={(option) => option.title}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Search" />
-                )}
-              />
-              <Button variant="contained" size="small">
-                Trade spot now
-              </Button>
+              <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
+                Spot Account
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                }}
+              >
+                <Box>
+                  <Box
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.4)',
+                      fontSize: 14,
+                    }}
+                  >
+                    Total Equity
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: 25,
+                      fontWeight: 600,
+                      display: 'flex',
+                      alignItems: 'flex-end',
+                    }}
+                  >
+                    0.00000000
+                    <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
+                      BTC
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.4)',
+                      fontSize: 14,
+                    }}
+                  >
+                    ≈ 0.00 USD
+                  </Box>
+                </Box>
+                <Box>
+                  <Box
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.4)',
+                      fontSize: 14,
+                    }}
+                  >
+                    Available Balance
+                  </Box>
+                  <Box
+                    sx={{
+                      fontSize: 25,
+                      fontWeight: 600,
+                      display: 'flex',
+                      alignItems: 'flex-end',
+                    }}
+                  >
+                    0.00000000
+                    <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
+                      BTC
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      color: 'rgba(0, 0, 0, 0.4)',
+                      fontSize: 14,
+                    }}
+                  >
+                    ≈ 0.00 USD
+                  </Box>
+                </Box>
+              </Box>
             </Box>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Coin</StyledTableCell>
-                    <StyledTableCell>Wallet Balance</StyledTableCell>
-                    <StyledTableCell>Available Balance</StyledTableCell>
-                    <StyledTableCell>Reserved for Orders</StyledTableCell>
-                    <StyledTableCell>Equivalent</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow
-                      key={row.name}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell>{row.calories}</StyledTableCell>
-                      <StyledTableCell>{row.fat}</StyledTableCell>
-                      <StyledTableCell>{row.carbs}</StyledTableCell>
-                      <StyledTableCell>{row.protein}</StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <Box
+              sx={{
+                // height: '100vh',
+                backgroundColor: '#fff',
+                marginTop: 5,
+                borderRadius: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: 3,
+                }}
+              >
+                <Autocomplete
+                  id="grouped-demo"
+                  options={options.sort(
+                    (a, b) => -b.firstLetter.localeCompare(a.firstLetter),
+                  )}
+                  groupBy={(option) => option.firstLetter}
+                  getOptionLabel={(option) => option.title}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Search" />
+                  )}
+                />
+                <Button variant="contained" size="small">
+                  Trade spot now
+                </Button>
+              </Box>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Coin</StyledTableCell>
+                      <StyledTableCell>Wallet Balance</StyledTableCell>
+                      <StyledTableCell>Available Balance</StyledTableCell>
+                      <StyledTableCell>Reserved for Orders</StyledTableCell>
+                      <StyledTableCell>Equivalent</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <StyledTableRow
+                        key={row.name}
+                        sx={{
+                          '&:last-child td, &:last-child th': { border: 0 },
+                        }}
+                      >
+                        <StyledTableCell component="th" scope="row">
+                          {row.name}
+                        </StyledTableCell>
+                        <StyledTableCell>{row.calories}</StyledTableCell>
+                        <StyledTableCell>{row.fat}</StyledTableCell>
+                        <StyledTableCell>{row.carbs}</StyledTableCell>
+                        <StyledTableCell>{row.protein}</StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </>
-  );
+      </>
+    );
+  else return <Box>Loading...</Box>;
 };
 
 export default Assets;

@@ -5,19 +5,32 @@ import { useTranslate } from '@app/hooks/translate';
 import { Box, Container, FormLabel, TextField } from '@mui/material';
 
 import { makeStyles, withStyles } from '@mui/styles';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const P2P: NextPage = () => {
   const { t } = useTranslate();
   const classes = useStyles();
+  const router = useRouter();
+  const token = Cookies.get('token');
 
-  return (
-    <>
-      <Seo title={t('app.p2p.title')} />
-      <Box className={classes.main}>
-        <P2pMain />
-      </Box>
-    </>
-  );
+  useEffect(() => {
+    if (!token) {
+      router.push('vi/auth/login');
+    }
+  }, []);
+
+  if (token)
+    return (
+      <>
+        <Seo title={t('app.p2p.title')} />
+        <Box className={classes.main}>
+          <P2pMain />
+        </Box>
+      </>
+    );
+  else return <Box>Loading ...</Box>;
 };
 
 const useStyles = makeStyles({
