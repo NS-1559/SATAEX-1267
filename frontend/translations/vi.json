@@ -9,6 +9,8 @@
   "app.header.assets": "tài sản",
   "app.header.logIn": "đăng nhập",
   "app.header.signUp": "đăng ký",
+  "app.header.logOut": "đăng xuất",
+  "app.header.myInfo": "thông tin của tôi",
   "app.header.en": "EN",
   "app.header.vi": "VI",
   "app.header.jp": "JP",

@@ -3,9 +3,22 @@ import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { parseJwt } from '@utils/parseJwt';
 
 const Info: NextPage = () => {
   const { t } = useTranslate();
+  const router = useRouter();
+  const token = Cookies.get('token');
+  const tokenData = parseJwt(token);
+
+  useEffect(() => {
+    if (!token) {
+      router.push('/vi/auth/login');
+    }
+  }, []);
 
   const Wrapper = styled(Box)`
     border: 1px solid #e8eaec;
@@ -45,28 +58,28 @@ const Info: NextPage = () => {
         <Title>Account Information</Title>
         <ItemWrapper>
           <ItemTitle>UID</ItemTitle>
-          <Box>17880611</Box>
+          <Box>{tokenData && tokenData.user_id}</Box>
         </ItemWrapper>
         <ItemWrapper>
-          <ItemTitle>Nickname</ItemTitle>
-          <Box>duyanhvn1999@gmail.com</Box>
+          <ItemTitle>Email</ItemTitle>
+          <Box>{tokenData && tokenData.email}</Box>
+        </ItemWrapper>
+        <ItemWrapper>
+          <ItemTitle>First name</ItemTitle>
+          <Box>{tokenData && tokenData.first_name}</Box>
+        </ItemWrapper>
+        <ItemWrapper>
+          <ItemTitle>Last name</ItemTitle>
+          <Box>{tokenData && tokenData.last_name}</Box>
         </ItemWrapper>
         <ItemWrapper>
           <ItemTitle>Login Password</ItemTitle>
           <Box>*********</Box>
         </ItemWrapper>
-        <ItemWrapper>
-          <ItemTitle>Identity Verification</ItemTitle>
-          <Box>Unverified</Box>
-        </ItemWrapper>
-        <ItemWrapper>
-          <ItemTitle>Trusted Devices Management</ItemTitle>
-          <Box>You have 1 trusted devices logged in</Box>
-        </ItemWrapper>
         <Title>Two-Factor Authentication</Title>
         <ItemWrapper>
           <ItemTitle>Email Authentication</ItemTitle>
-          <Box>duyanhvn1999@gmail.com</Box>
+          <Box>{tokenData && tokenData.email}</Box>
         </ItemWrapper>
         <ItemWrapper>
           <ItemTitle>SMS Authentication</ItemTitle>

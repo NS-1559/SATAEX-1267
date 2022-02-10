@@ -2,9 +2,9 @@ import { NextPage } from 'next';
 import P2pMain from '@components/pages/p2p/p2pMain';
 import Seo from '@components/common/Seo';
 import { useTranslate } from '@app/hooks/translate';
-import { Box, Container, FormLabel, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { makeStyles, withStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
