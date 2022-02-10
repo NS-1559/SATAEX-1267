@@ -4,8 +4,6 @@ import { Coin } from '@models/Coin';
 import { useTheme } from '@mui/material/styles';
 import { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
 
-
-
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -30,30 +28,27 @@ export default function TokenDetail(props: any) {
   const [tokenDetail, setTokenDetail] = useState(token);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/asset')
-        .then((response: any) => {
-           
-        });
+    axios.get('http://127.0.0.1:8000/api/asset').then((response: any) => {});
   }, []);
 
   const handleTokenDetailChange = (event: any) => {
     const { name, value } = event.target;
-      setTokenDetail({
-        ...tokenDetail,
-        [name]:value
-      });
+    setTokenDetail({
+      ...tokenDetail,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = (event: any) =>{
+  const handleSubmit = (event: any) => {
     const newToken = {
-      name: token.name,
-      symbol: token.symbol
-    }
-
+      name: tokenDetail.name,
+      symbol: tokenDetail.symbol,
+    };
 
     // post to server new token here
-    console.log(newToken);
-  }
+    axios.post('http://127.0.0.1:8000/api/asset/', newToken);
+    handleChangeStatus(1, null);
+  };
 
   return (
     <Box>
@@ -73,7 +68,6 @@ export default function TokenDetail(props: any) {
                 variant="standard"
                 value={tokenDetail.name}
                 onChange={handleTokenDetailChange}
-
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -97,7 +91,6 @@ export default function TokenDetail(props: any) {
           onClick={handleSubmit}
         >
           Confirm
-          
         </Button>
         <Button
           variant="contained"

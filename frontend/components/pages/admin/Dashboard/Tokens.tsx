@@ -38,26 +38,23 @@ export default function Tokens(props: any) {
     return state.common.coins.data;
   });
 
-
   const [topTokens, setTopTokens] = useState(tokens);
 
   const [keyword, setKeyword] = useState('');
 
-
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/asset')
-        .then((response: any) => {
-            const newTopTokens = [];
-            const data = response.data;
-            for(let i = 0; i < data.length; i++){
-              for(let j = 0; j < tokens.length; j++ ){
-                if(data[i].symbol.toLowerCase() === tokens[j].symbol) newTopTokens.push(tokens[j]);
-              }
-            }
-            setTopTokens(newTopTokens);
-        });
+    axios.get('http://127.0.0.1:8000/api/asset').then((response: any) => {
+      const newTopTokens = [];
+      const data = response.data;
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < tokens.length; j++) {
+          if (data[i].symbol.toLowerCase() === tokens[j].symbol)
+            newTopTokens.push(tokens[j]);
+        }
+      }
+      setTopTokens(newTopTokens);
+    });
   }, []);
-
 
   const displayTokens = useMemo(() => {
     return topTokens;
@@ -73,15 +70,17 @@ export default function Tokens(props: any) {
     handleChangeStatus(number, token);
   };
 
-  const handleRemoveButtonClick = (coin:any) => {
+  const handleRemoveButtonClick = (coin: any) => {
     // delete token here
+    axios.delete(`http://127.0.0.1:8000/api/asset/${coin.name}`);
+    const newTopTokens = topTokens.filter((token) => {
+      return token.name !== coin.name;
+    });
+    setTopTokens(newTopTokens);
   };
-
-
   return (
     <Box sx={{ width: '100%', py: 8, mt: 4 }}>
       <Container>
-        
         <Paper
           elevation={0}
           sx={{
@@ -200,7 +199,9 @@ export default function Tokens(props: any) {
           variant="contained"
           color="warning"
           sx={{ color: 'white', mt: 2, width: '8rem' }}
-          onClick={() => handleEditButtonClick(4, {name: 'undefine', symbol: 'undefine'})}
+          onClick={() =>
+            handleEditButtonClick(4, { name: 'undefine', symbol: 'undefine' })
+          }
         >
           Add Token
         </Button>
