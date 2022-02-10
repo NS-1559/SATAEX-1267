@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const navLinks = [
   {
@@ -86,10 +87,16 @@ const Header: FC = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const token = Cookies.get('token');
 
   function onSelectLanguage(l: string) {
     router.push({ pathname, query }, asPath, { locale: l });
     handleClose();
+  }
+
+  function handleLogout() {
+    Cookies.remove('token');
+    router.push('/');
   }
 
   return (
@@ -121,30 +128,54 @@ const Header: FC = () => {
           ))}
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Link
-            href="/assets"
-            className={`${classes.navLink} ${classes.actionButton}`}
-          >
-            <Typography className={classes.actionButtonText}>
-              {t('app.header.assets')}
-            </Typography>
-          </Link>
-          <Link
-            href="/auth/login"
-            className={`${classes.navLink} ${classes.actionButton}`}
-          >
-            <Typography className={classes.actionButtonText}>
-              {t('app.header.logIn')}
-            </Typography>
-          </Link>
-          <Link
-            href="/auth/sign-up"
-            className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonPrimary}`}
-          >
-            <Typography className={classes.actionButtonText}>
-              {t('app.header.signUp')}
-            </Typography>
-          </Link>
+          {token ? (
+            <>
+              <Link
+                href="/assets"
+                className={`${classes.navLink} ${classes.actionButton}`}
+              >
+                <Typography className={classes.actionButtonText}>
+                  {t('app.header.assets')}
+                </Typography>
+              </Link>
+              <Link
+                href="/user/info"
+                className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonPrimary}`}
+              >
+                <Typography className={classes.actionButtonText}>
+                  {t('app.header.myInfo')}
+                </Typography>
+              </Link>
+              <Link
+                onClick={handleLogout}
+                href="#"
+                className={`${classes.navLink} ${classes.actionButton}`}
+              >
+                <Typography className={classes.actionButtonText}>
+                  {t('app.header.logOut')}
+                </Typography>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className={`${classes.navLink} ${classes.actionButton}`}
+              >
+                <Typography className={classes.actionButtonText}>
+                  {t('app.header.logIn')}
+                </Typography>
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonPrimary}`}
+              >
+                <Typography className={classes.actionButtonText}>
+                  {t('app.header.signUp')}
+                </Typography>
+              </Link>
+            </>
+          )}
           <Typography
             className={`${classes.navLink} ${classes.actionButton} ${classes.actionButtonText}`}
             onClick={handleOpen}

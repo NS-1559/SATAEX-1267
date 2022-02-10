@@ -43,7 +43,11 @@ class AuthController extends Controller
 
         $userId = auth()->user()->user_id;
         $user = User::where('id', $userId)->first();
-        $token = auth()->claims(['user_id' => $userId, 'first_name' => $user->first_name, 'last_name' => $user->last_name])->attempt($validator->validated());
+        $token = auth()->claims(['user_id' => $userId,
+                                'first_name' => $user->first_name,
+                                'last_name' => $user->last_name,
+                                'email' => $user->identity->email,
+                                'role' => $user->identity->role])->attempt($validator->validated());
 
         return $this->createNewToken($token);
     }

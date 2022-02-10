@@ -2,9 +2,11 @@ import { Box, Container, Typography, Button } from '@mui/material';
 import { FC } from 'react';
 import { useTranslate } from '@app/hooks/translate';
 import Link from '@components/common/Link';
+import Cookies from 'js-cookie';
 
 const HomeHeader: FC = () => {
   const { t } = useTranslate();
+  const token = Cookies.get('token');
 
   return (
     <Box sx={{ width: '100%', backgroundColor: 'background.paper' }}>
@@ -36,11 +38,13 @@ const HomeHeader: FC = () => {
         >
           {t('app.home.header-description')}
         </Typography>
-        <Link href="/auth/sign-up">
-          <Button variant="contained" size="large">
-            {t('app.home.header-sign-up-button')}
-          </Button>
-        </Link>
+        {!token && (
+          <Link href="/auth/sign-up">
+            <Button variant="contained" size="large">
+              {t('app.home.header-sign-up-button')}
+            </Button>
+          </Link>
+        )}
       </Container>
     </Box>
   );

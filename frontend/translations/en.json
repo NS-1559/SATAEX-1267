@@ -9,6 +9,8 @@
   "app.header.p2p": "P2P",
   "app.header.logIn": "log in",
   "app.header.signUp": "Sign up",
+  "app.header.myInfo": "My info",
+  "app.header.logOut": "Log out",
   "app.header.en": "EN",
   "app.header.vi": "VI",
   "app.header.jp": "JP",
