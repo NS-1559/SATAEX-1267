@@ -1,35 +1,34 @@
-import { FC } from 'react';
+import { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import { AdvancedRealTimeChart } from 'react-ts-tradingview-widgets';
 import { Box, Container, FormLabel, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@app/hooks/redux';
+import axios from 'axios';
 
-const tokenList = [
+const defaultTokens = [
   { label: 'BTC/USDT', value: 'BTCUSDT' },
-  { label: 'ETH/USDT', value: 'ETHUSDT' },
-  { label: 'BNB/USDT', value: 'BNBUSDT' },
-  { label: 'DOT/USDT', value: 'DOTUSDT' },
-  { label: 'ADA/USDT', value: 'ADAUSDT' },
-  { label: 'LUNA/USDT', value: 'LUNAUSDT' },
-  { label: 'MATIC/USDT', value: 'MATICUSDT' },
-  { label: 'SHIB/USDT', value: 'SHIBUSDT' },
-  { label: 'DOGE/USDT', value: 'DOGEUSDT' },
-  { label: 'ALICE/USDT', value: 'ALICEUSDT' },
-  { label: 'OGN/USDT', value: 'OGNUSDT' },
-  { label: 'AXS/USDT', value: 'AXSUSDT' },
-  { label: 'EOS/USDT', value: 'EOSUSDT' },
-  { label: 'TLM/USDT', value: 'TLMUSDT' },
-  { label: 'MBOX/USDT', value: 'MBOXUSDT' },
-  { label: 'SAND/USDT', value: 'SANDUSDT' },
-  { label: 'MANA/USDT', value: 'MANAUSDT' },
-  { label: 'ICP/USDT', value: 'ICPUSDT' },
 ];
 
 const TradingView: FC = () => {
   const router = useRouter();
   const tradePair = router.asPath.split('/')[2];
+  const [tokenList, setTokenList] = useState(defaultTokens);
   console.log(tradePair);
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/asset')
+        .then((response: any) => {
+            const data = response.data;
+            const updatedTokenList = data.map((token:any) =>{
+              return {
+                label: `${token.symbol.toUpperCase()}/USDT`,
+                value: `${token.symbol.toUpperCase()}USDT`
+              }
+            })
+            setTokenList(updatedTokenList)
+        });
+  }, []);
 
   return (
     <Box sx={{ width: '100%', py: 8 }}>
