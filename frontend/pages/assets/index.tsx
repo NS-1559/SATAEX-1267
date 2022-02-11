@@ -49,9 +49,9 @@ const Assets: NextPage = () => {
   const [walletManager, setWalletManager] = useState(null); 
 
   useEffect(() => {
-    // if (!token) {
-    //   router.push('vi/auth/login');
-    // }
+    if (!token) {
+      router.push('vi/auth/login');
+    }
     axios.get('http://127.0.0.1:8000/api/asset').then((response: any) => {
       setTokenList(response.data);
       const rowList = response.data.map((coin: any) => {
