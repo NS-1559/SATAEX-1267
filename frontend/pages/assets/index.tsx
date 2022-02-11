@@ -18,12 +18,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
-
-
-const demoWallet = {
-  apiKey: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
-  secret:'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC'
-}
+import { parseJwt } from '@utils/parseJwt';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,10 +38,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Assets: NextPage = () => {
   const { t } = useTranslate();
   const router = useRouter();
-  const token = Cookies.get('token');
   const [tokenList, setTokenList] = useState([]);
   const [rows, setRow] = useState([] as any[]);
-  const [walletManager, setWalletManager] = useState(null); 
+  const [walletManager, setWalletManager] = useState(null);
+  const token = Cookies.get('token');
+  const tokenData = parseJwt(token);
+
+  const demoWallet = {
+    apiKey: tokenData.api_key,
+    secret: tokenData.secret_key,
+  };
+
+  console.log(demoWallet);
 
   useEffect(() => {
     if (!token) {
@@ -67,22 +70,18 @@ const Assets: NextPage = () => {
       setRow(rowList);
     });
 
-    
-    axios.post('http://localhost:5000/test/getBalance', {
-      ...demoWallet
-    })
-    .then(function (response) {
-      console.log('hi');
-      setWalletManager(response.data);
-    })
-    .catch(function (error) {
-    });
-
-
+    axios
+      .post('http://localhost:5000/test/getBalance', {
+        ...demoWallet,
+      })
+      .then(function (response) {
+        console.log('hi');
+        setWalletManager(response.data);
+      })
+      .catch(function (error) {});
   }, [router, token]);
 
-
-  console.log(walletManager)
+  console.log(walletManager);
 
   const options = tokenList.map((option: any) => {
     const firstLetter = option.symbol[0].toUpperCase();
@@ -102,10 +101,6 @@ const Assets: NextPage = () => {
         }}
       >
         <Box sx={{ width: '430px' }}>
-          <Box sx={{ padding: 5 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            </Box>
-          </Box>
           <Box sx={{ width: '100%' }}>
             <Box
               sx={{
@@ -282,21 +277,24 @@ const Assets: NextPage = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
-                <StyledTableRow
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 },
-                      }}
-                    >
-                      <StyledTableCell component="th" scope="row">
-                        USDT
-                      </StyledTableCell>
-                      <StyledTableCell>{walletManager && walletManager['USDT'].total}</StyledTableCell>
-                      <StyledTableCell>{walletManager && walletManager['USDT'].free}</StyledTableCell>
-                      <StyledTableCell>
-                        {walletManager && walletManager['USDT'].used}
-                      </StyledTableCell>
-                    </StyledTableRow>
+                  <StyledTableRow
+                    sx={{
+                      '&:last-child td, &:last-child th': { border: 0 },
+                    }}
+                  >
+                    <StyledTableCell component="th" scope="row">
+                      USDT
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {walletManager && walletManager['USDT'].total}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {walletManager && walletManager['USDT'].free}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {walletManager && walletManager['USDT'].used}
+                    </StyledTableCell>
+                  </StyledTableRow>
                   {rows.map((row) => (
                     <StyledTableRow
                       key={row.coin}
@@ -307,8 +305,12 @@ const Assets: NextPage = () => {
                       <StyledTableCell component="th" scope="row">
                         {row.coin}
                       </StyledTableCell>
-                      <StyledTableCell>{walletManager && walletManager[row.coin].total}</StyledTableCell>
-                      <StyledTableCell>{walletManager && walletManager[row.coin].free}</StyledTableCell>
+                      <StyledTableCell>
+                        {walletManager && walletManager[row.coin].total}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {walletManager && walletManager[row.coin].free}
+                      </StyledTableCell>
                       <StyledTableCell>
                         {walletManager && walletManager[row.coin].used}
                       </StyledTableCell>

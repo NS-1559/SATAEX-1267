@@ -6,36 +6,21 @@ import {
   useState,
 } from 'react';
 import { useAppSelector } from '@app/hooks/redux';
-import {
-  Box,
-  Button,
-  Divider,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Divider, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-
 import { useTranslate } from '@app/hooks/translate';
 import { makeStyles } from '@mui/styles';
+import { parseJwt } from '@utils/parseJwt';
+import Cookies from 'js-cookie';
 
 // binance test
 import axios from 'axios';
-
-
-const demoWallet = {
-  apiKey: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
-  secret:'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC'
-}
-
-
-
 
 //here
 const MakeOrder: FC = () => {
@@ -49,19 +34,26 @@ const MakeOrder: FC = () => {
   const [quantity, setQuantity] = useState();
   const [orderPrice, setOrderPrice] = useState();
 
-  const [walletManager, setWalletManager] = useState(null); 
-  
+  const [walletManager, setWalletManager] = useState(null);
+  const token = Cookies.get('token');
+  const tokenData = parseJwt(token);
+
+  const demoWallet = {
+    apiKey: tokenData.api_key,
+    secret: tokenData.secret_key,
+  };
+
+  console.log(demoWallet);
 
   useEffect(() => {
-    axios.post('http://localhost:5000/test/getBalance', {
-      ...demoWallet
-    })
-    .then(function (response) {
-
-      setWalletManager(response.data);
-    })
-    .catch(function (error) {
-    });
+    axios
+      .post('http://localhost:5000/test/getBalance', {
+        ...demoWallet,
+      })
+      .then(function (response) {
+        setWalletManager(response.data);
+      })
+      .catch(function (error) {});
   }, []);
 
   const handleModeChange = (event: SelectChangeEvent) => {
@@ -88,40 +80,41 @@ const MakeOrder: FC = () => {
   };
 
   const handleMakeOfferClick = (event: any) => {
-
-    if(mode === 'market'){
-      axios.post('http://localhost:5000/test/makeMarketOrder', {
-        wallet: demoWallet,
-        direction,
-        quantity,
-        tokenSymbol
-      }).then(res =>{
-        console.log(res.data);
-        alert('Success');
-        axios.post('http://localhost:5000/test/getBalance', {
-            ...demoWallet
-          })
-          .then(function (response) {
-
-            setWalletManager(response.data);
-          })
-          .catch(function (error) {
+    if (mode === 'market') {
+      axios
+        .post('http://localhost:5000/test/makeMarketOrder', {
+          wallet: demoWallet,
+          direction,
+          quantity,
+          tokenSymbol,
+        })
+        .then((res) => {
+          console.log(res.data);
+          alert('Success');
+          axios
+            .post('http://localhost:5000/test/getBalance', {
+              ...demoWallet,
+            })
+            .then(function (response) {
+              setWalletManager(response.data);
+            })
+            .catch(function (error) {});
         });
-      });
-    }else{
-      axios.post('http://localhost:5000/test/makeLimitOrder', {
-        wallet: demoWallet,
-        direction,
-        quantity,
-        tokenSymbol,
-        orderPrice
-      }).then(res =>{
-        console.log(res.data);
-        alert('Success');
-      });
+    } else {
+      axios
+        .post('http://localhost:5000/test/makeLimitOrder', {
+          wallet: demoWallet,
+          direction,
+          quantity,
+          tokenSymbol,
+          orderPrice,
+        })
+        .then((res) => {
+          console.log(res.data);
+          alert('Success');
+        });
     }
   };
-  
 
   console.log(walletManager);
 
@@ -170,18 +163,22 @@ const MakeOrder: FC = () => {
           </Select>
         </Box>
 
-        {mode === 'market' ? '' : <Box className={classes.inputWrap}>
-          <label className={classes.normalText}>Order Price</label>
-          <TextField
-            size="small"
-            type="number"
-            className={classes.input}
-            label="USDT"
-            value={orderPrice}
-            onChange={handleOrderPriceChange}
-          />
-        </Box>}
-        
+        {mode === 'market' ? (
+          ''
+        ) : (
+          <Box className={classes.inputWrap}>
+            <label className={classes.normalText}>Order Price</label>
+            <TextField
+              size="small"
+              type="number"
+              className={classes.input}
+              label="USDT"
+              value={orderPrice}
+              onChange={handleOrderPriceChange}
+            />
+          </Box>
+        )}
+
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Quantity</label>
           <TextField
@@ -196,8 +193,9 @@ const MakeOrder: FC = () => {
       </TabsUnstyled>
       <Box className={classes.inputWrap}>
         <label className={classes.normalText}>
-          Available {direction === 'buy' ? 'USDT' : tokenSymbol} :  
-          {walletManager && walletManager[direction === 'buy' ? 'USDT' : tokenSymbol].total}
+          Available {direction === 'buy' ? 'USDT' : tokenSymbol} :
+          {walletManager &&
+            walletManager[direction === 'buy' ? 'USDT' : tokenSymbol].total}
         </label>
       </Box>
       <Button

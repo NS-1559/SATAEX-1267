@@ -212,45 +212,6 @@ const Order: NextPage = () => {
         }}
       >
         <Box sx={{ width: '430px' }}>
-          <Box sx={{ padding: 5 }}>
-            <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
-              Total Equity
-            </Box>
-            <Box
-              sx={{
-                fontSize: 40,
-                fontWeight: 600,
-                marginBottom: 2,
-                display: 'flex',
-                alignItems: 'flex-end',
-              }}
-            >
-              0.00000000
-              <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 2 }}>
-                BTC
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                color: 'rgba(0, 0, 0, 0.4)',
-                fontSize: 14,
-                marginBottom: 2,
-              }}
-            >
-              ≈ 0.00 USD
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button variant="contained" size="small">
-                Deposit
-              </Button>
-              <Button variant="outlined" size="small">
-                Withdraw
-              </Button>
-              <Button variant="outlined" size="small">
-                Transfer
-              </Button>
-            </Box>
-          </Box>
           <Box sx={{ width: '100%' }}>
             <Box
               sx={{
