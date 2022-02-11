@@ -23,7 +23,7 @@ import {
 import { makeStyles } from '@mui/styles';
 
 export default function TokenDetail(props: any) {
-  const { token, handleChangeStatus } = props;
+  const { token, handleChangeStatus, addNewStatus } = props;
 
   const [tokenDetail, setTokenDetail] = useState(token);
 
@@ -38,6 +38,8 @@ export default function TokenDetail(props: any) {
       [name]: value,
     });
   };
+
+  console.log(addNewStatus)
 
   const handleSubmit = (event: any) => {
     const newToken = {

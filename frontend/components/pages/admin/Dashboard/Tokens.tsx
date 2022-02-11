@@ -66,8 +66,8 @@ export default function Tokens(props: any) {
   };
 
   //
-  const handleEditButtonClick = (number: any, token: any) => {
-    handleChangeStatus(number, token);
+  const handleEditButtonClick = (number: any, token: any, addNewStatus = false) => {
+    handleChangeStatus(number, token, addNewStatus);
   };
 
   const handleRemoveButtonClick = (coin: any) => {
@@ -140,21 +140,6 @@ export default function Tokens(props: any) {
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          color:
-                            coin.marketData.priceChangePercentage24H < 0
-                              ? 'red'
-                              : 'green',
-                        }}
-                      >
-                        {formatPriceChange(
-                          coin.marketData.priceChangePercentage24H,
-                        )}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
                       <Typography variant="subtitle1">
                         {formatNumberWithSuffix(
                           coin.marketData.totalVolume.usd,
@@ -200,7 +185,7 @@ export default function Tokens(props: any) {
           color="warning"
           sx={{ color: 'white', mt: 2, width: '8rem' }}
           onClick={() =>
-            handleEditButtonClick(4, { name: 'undefine', symbol: 'undefine' })
+            handleEditButtonClick(4, { name: 'undefine', symbol: 'undefine' }, true)
           }
         >
           Add Token
