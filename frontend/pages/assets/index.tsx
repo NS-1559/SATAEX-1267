@@ -19,6 +19,12 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 
+
+const demoWallet = {
+  apiKey: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
+  secret:'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC'
+}
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.gray,
@@ -40,11 +46,12 @@ const Assets: NextPage = () => {
   const token = Cookies.get('token');
   const [tokenList, setTokenList] = useState([]);
   const [rows, setRow] = useState([] as any[]);
+  const [walletManager, setWalletManager] = useState(null); 
 
   useEffect(() => {
-    if (!token) {
-      router.push('vi/auth/login');
-    }
+    // if (!token) {
+    //   router.push('vi/auth/login');
+    // }
     axios.get('http://127.0.0.1:8000/api/asset').then((response: any) => {
       setTokenList(response.data);
       const rowList = response.data.map((coin: any) => {
@@ -59,7 +66,23 @@ const Assets: NextPage = () => {
       console.log(rowList);
       setRow(rowList);
     });
+
+    
+    axios.post('http://localhost:5000/test/getBalance', {
+      ...demoWallet
+    })
+    .then(function (response) {
+      console.log('hi');
+      setWalletManager(response.data);
+    })
+    .catch(function (error) {
+    });
+
+
   }, [router, token]);
+
+
+  console.log(walletManager)
 
   const options = tokenList.map((option: any) => {
     const firstLetter = option.symbol[0].toUpperCase();
@@ -80,42 +103,7 @@ const Assets: NextPage = () => {
       >
         <Box sx={{ width: '430px' }}>
           <Box sx={{ padding: 5 }}>
-            <Box sx={{ fontSize: 20, fontWeight: 600, marginBottom: 2 }}>
-              Total Equity
-            </Box>
-            <Box
-              sx={{
-                fontSize: 40,
-                fontWeight: 600,
-                marginBottom: 2,
-                display: 'flex',
-                alignItems: 'flex-end',
-              }}
-            >
-              0.00000000
-              <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 2 }}>
-                BTC
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                color: 'rgba(0, 0, 0, 0.4)',
-                fontSize: 14,
-                marginBottom: 2,
-              }}
-            >
-              ≈ 0.00 USD
-            </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button variant="contained" size="small">
-                Deposit
-              </Button>
-              <Button variant="outlined" size="small">
-                Withdraw
-              </Button>
-              <Button variant="outlined" size="small">
-                Transfer
-              </Button>
             </Box>
           </Box>
           <Box sx={{ width: '100%' }}>
@@ -205,7 +193,7 @@ const Assets: NextPage = () => {
                     alignItems: 'flex-end',
                   }}
                 >
-                  0.00000000
+                  {walletManager && walletManager['BTC'].total}
                   <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
                     BTC
                   </Box>
@@ -216,7 +204,7 @@ const Assets: NextPage = () => {
                     fontSize: 14,
                   }}
                 >
-                  ≈ 0.00 USD
+                  ≈ {walletManager && walletManager['BTC'].free * 44000} $
                 </Box>
               </Box>
               <Box>
@@ -236,7 +224,7 @@ const Assets: NextPage = () => {
                     alignItems: 'flex-end',
                   }}
                 >
-                  0.00000000
+                  {walletManager && walletManager['BTC'].free}
                   <Box sx={{ fontSize: 14, marginLeft: 1, marginBottom: 1 }}>
                     BTC
                   </Box>
@@ -247,7 +235,7 @@ const Assets: NextPage = () => {
                     fontSize: 14,
                   }}
                 >
-                  ≈ 0.00 USD
+                  ≈ {walletManager && walletManager['BTC'].free * 44000} $
                 </Box>
               </Box>
             </Box>
@@ -290,11 +278,25 @@ const Assets: NextPage = () => {
                     <StyledTableCell>Coin</StyledTableCell>
                     <StyledTableCell>Wallet Balance</StyledTableCell>
                     <StyledTableCell>Available Balance</StyledTableCell>
-                    <StyledTableCell>Reserved for Orders</StyledTableCell>
-                    <StyledTableCell>Equivalent</StyledTableCell>
+                    <StyledTableCell>Frozen</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
+
+                <StyledTableRow
+                      sx={{
+                        '&:last-child td, &:last-child th': { border: 0 },
+                      }}
+                    >
+                      <StyledTableCell component="th" scope="row">
+                        USDT
+                      </StyledTableCell>
+                      <StyledTableCell>{walletManager && walletManager['USDT'].total}</StyledTableCell>
+                      <StyledTableCell>{walletManager && walletManager['USDT'].free}</StyledTableCell>
+                      <StyledTableCell>
+                        {walletManager && walletManager['USDT'].used}
+                      </StyledTableCell>
+                    </StyledTableRow>
                   {rows.map((row) => (
                     <StyledTableRow
                       key={row.coin}
@@ -305,12 +307,11 @@ const Assets: NextPage = () => {
                       <StyledTableCell component="th" scope="row">
                         {row.coin}
                       </StyledTableCell>
-                      <StyledTableCell>{row.wallet_balance}</StyledTableCell>
-                      <StyledTableCell>{row.available_balance}</StyledTableCell>
+                      <StyledTableCell>{walletManager && walletManager[row.coin].total}</StyledTableCell>
+                      <StyledTableCell>{walletManager && walletManager[row.coin].free}</StyledTableCell>
                       <StyledTableCell>
-                        {row.reserved_for_orders}
+                        {walletManager && walletManager[row.coin].used}
                       </StyledTableCell>
-                      <StyledTableCell>{row.equivalent}</StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
