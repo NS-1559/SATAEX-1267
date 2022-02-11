@@ -29,9 +29,6 @@ const Markets: NextPage = () => {
         <TradingView />
         <MakeOrder />
       </Box>
-      <Box className={classes.orderTableWrap}>
-        <OrderTable />
-      </Box>
     </>
   );
 };
