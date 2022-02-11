@@ -192,19 +192,29 @@ const MakeOrder: FC = () => {
         </Box>
       </TabsUnstyled>
       <Box className={classes.inputWrap}>
-        <label className={classes.normalText}>
-          Available {direction === 'buy' ? 'USDT' : tokenSymbol} :
+        <label className={classes.balanceText}>
+          Available:{' '}
           {walletManager &&
-            walletManager[direction === 'buy' ? 'USDT' : tokenSymbol].total}
+            walletManager[direction === 'buy' ? 'USDT' : tokenSymbol]
+              .total}{' '}
+          {direction === 'buy' ? 'USDT' : tokenSymbol}
         </label>
       </Box>
-      <Button
-        onClick={handleMakeOfferClick}
-        className={classes.submitButton}
-        variant="contained"
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
       >
-        Make Order
-      </Button>
+        <Button
+          onClick={handleMakeOfferClick}
+          className={classes.submitButton}
+          variant="contained"
+        >
+          Make Order
+        </Button>
+      </Box>
     </Box>
   );
 };
@@ -228,9 +238,16 @@ const useStyles = makeStyles({
   },
 
   normalText: {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     fontWeight: 300,
     fontFamily: 'sans-serif',
+  },
+
+  balanceText: {
+    fontSize: '1.2rem',
+    fontWeight: 400,
+    fontFamily: 'sans-serif',
+    color: 'white',
   },
 
   span: {
