@@ -39,8 +39,6 @@ export default function TokenDetail(props: any) {
     });
   };
 
-  console.log(addNewStatus)
-
   const handleSubmit = (event: any) => {
     const newToken = {
       name: tokenDetail.name,
@@ -48,7 +46,9 @@ export default function TokenDetail(props: any) {
     };
 
     // post to server new token here
-    axios.post('http://127.0.0.1:8000/api/asset/', newToken);
+    if (addNewStatus) axios.post('http://127.0.0.1:8000/api/asset/', newToken);
+    // put to server edit token
+    else axios.put(`http://127.0.0.1:8000/api/asset/${token.name}`, newToken);
     handleChangeStatus(1, null);
   };
 

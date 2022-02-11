@@ -73,6 +73,14 @@ const Info: NextPage = () => {
           <Box>{tokenData && tokenData.last_name}</Box>
         </ItemWrapper>
         <ItemWrapper>
+          <ItemTitle>Phone number</ItemTitle>
+          <Box>{tokenData && tokenData.phone_number}</Box>
+        </ItemWrapper>
+        <ItemWrapper>
+          <ItemTitle>Address</ItemTitle>
+          <Box>{tokenData && tokenData.address}</Box>
+        </ItemWrapper>
+        <ItemWrapper>
           <ItemTitle>Login Password</ItemTitle>
           <Box>*********</Box>
         </ItemWrapper>

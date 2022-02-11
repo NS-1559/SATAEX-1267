@@ -101,7 +101,6 @@ const MarketTable: FC = () => {
                   <TableCell align="left">
                     {t('app.markets.24h-volume')}
                   </TableCell>
-                  <TableCell align="left">{t('app.markets.chart')}</TableCell>
                   <TableCell align="left">
                     {t('app.markets.trade-button')}
                   </TableCell>
@@ -136,21 +135,6 @@ const MarketTable: FC = () => {
                     <TableCell align="left">
                       <Typography variant="subtitle1">
                         {formatPrice(coin.marketData.currentPrice.usd)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          color:
-                            coin.marketData.priceChangePercentage24H < 0
-                              ? 'red'
-                              : 'green',
-                        }}
-                      >
-                        {formatPriceChange(
-                          coin.marketData.priceChangePercentage24H,
-                        )}
                       </Typography>
                     </TableCell>
                     <TableCell align="left">

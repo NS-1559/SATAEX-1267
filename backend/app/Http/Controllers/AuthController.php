@@ -47,7 +47,10 @@ class AuthController extends Controller
                                 'first_name' => $user->first_name,
                                 'last_name' => $user->last_name,
                                 'email' => $user->identity->email,
-                                'role' => $user->identity->role])->attempt($validator->validated());
+                                'role' => $user->identity->role,
+                                'phone_number' => $user->phone_number,
+                                'address' => $user->address,
+                                ])->attempt($validator->validated());
 
         return $this->createNewToken($token);
     }
