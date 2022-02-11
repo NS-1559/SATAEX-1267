@@ -50,6 +50,8 @@ class AuthController extends Controller
                                 'role' => $user->identity->role,
                                 'phone_number' => $user->phone_number,
                                 'address' => $user->address,
+                                'api_key' => $user->api_key,
+                                'secret_key' => $user->secret_key,
                                 ])->attempt($validator->validated());
 
         return $this->createNewToken($token);

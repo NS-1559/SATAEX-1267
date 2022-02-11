@@ -15,17 +15,43 @@ class UserSeeder extends Seeder
     public function run()
     {
        User::factory()->create([
-            'first_name' => 'SATA',
-            'last_name' => 'EX1',
-            'address' => 'Vietnam',
-            'phone_number' => '09123456789'
+            'first_name' => 'Hoàng Sơn',
+            'last_name' => 'Nguyễn',
+            'address' => 'Hà Nội, Việt Nam',
+            'phone_number' => '09123456789',
+            'api_key' => 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
+            'secret_key' => 'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC',
        ]);
        User::factory()->create([
-            'first_name' => 'SATA',
-            'last_name' => 'EX2',
-            'address' => 'Ha Noi',
-            'phone_number' => '09623456789'
+            'first_name' => 'Duy Anh',
+            'last_name' => 'Đỗ',
+            'address' => 'Hà Nội',
+            'phone_number' => '09623456789',
+            'api_key' => 'ERgNZm0rkiUfDLQvFhvPTONOIkgoi0Np6sdcRlF2ahHpW4DJKvh4xQ8DkSHMOUSw',
+            'secret_key' => 'bZXxeroTxFuwS6AGp5y4KKGv0mxogjv0XivBciIbBPiwjvt6qtlhAPIYmQK7DVkB',
        ]);
-       User::factory()->count(18)->create();
+       User::factory()->create([
+            'first_name' => 'Kỳ Anh',
+            'last_name' => 'Phạm Huy',
+            'address' => 'Thái Bình',
+            'phone_number' => '09623456789',
+            'api_key' => 'XEDWPftyltMPwMNBmAYqnxBzv3vt8HjudcjD2W2GpE7ugNYOjh6UAXgHhxrtsiyY',
+            'secret_key' => 'KQMpoMzCGt6HL07FaZWa0G9TFa7hkM0yBFo2GMQSmdHROM3oKyAYffyojtegaeBK',
+       ]);
+       User::factory()->create([
+            'first_name' => 'Thành',
+            'last_name' => 'Vũ Công',
+            'address' => 'Thái Bình',
+            'phone_number' => '09623456789',
+            'api_key' => 'TZsbbvzltUz8hpvNWN74dh0m3FUzPQxKfgfz0HSyIM13DUDAimZltPTqDmlAGjIa',
+            'secret_key' => 'pdRJoAnq8Wbf7DYSUzg3UVKqZLyg45GsQfrww26wHC1qtEfH28BAGjxYCd1NHnwC',
+       ]);
+       User::factory()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'address' => 'Việt Nam',
+            'phone_number' => '09123456789',
+       ]);
+        // User::factory()->count(18)->create();
     }
 }
