@@ -10,29 +10,32 @@ import {
   Box,
   Button,
   Divider,
-  FormLabel,
-  Input,
-  InputAdornment,
   TextField,
   Typography,
-  ButtonGroup,
 } from '@mui/material';
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-import ccxt from 'ccxt';
 
 import { useTranslate } from '@app/hooks/translate';
-import { useTheme } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+
+// binance test
+import axios from 'axios';
+
+
+const demoWallet = {
+  apiKey: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
+  secret:'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC'
+}
+
+
+
 
 //here
 const MakeOrder: FC = () => {
@@ -45,6 +48,21 @@ const MakeOrder: FC = () => {
   const [mode, setMode] = useState('market');
   const [quantity, setQuantity] = useState();
   const [orderPrice, setOrderPrice] = useState();
+
+  const [walletManager, setWalletManager] = useState(null); 
+  
+
+  useEffect(() => {
+    axios.post('http://localhost:5000/test/getBalance', {
+      ...demoWallet
+    })
+    .then(function (response) {
+
+      setWalletManager(response.data);
+    })
+    .catch(function (error) {
+    });
+  }, []);
 
   const handleModeChange = (event: SelectChangeEvent) => {
     setMode(event.target.value as string);
@@ -70,8 +88,42 @@ const MakeOrder: FC = () => {
   };
 
   const handleMakeOfferClick = (event: any) => {
-    console.log(direction, mode, orderPrice, quantity);
+
+    if(mode === 'market'){
+      axios.post('http://localhost:5000/test/makeMarketOrder', {
+        wallet: demoWallet,
+        direction,
+        quantity,
+        tokenSymbol
+      }).then(res =>{
+        console.log(res.data);
+        alert('Success');
+        axios.post('http://localhost:5000/test/getBalance', {
+            ...demoWallet
+          })
+          .then(function (response) {
+
+            setWalletManager(response.data);
+          })
+          .catch(function (error) {
+        });
+      });
+    }else{
+      axios.post('http://localhost:5000/test/makeLimitOrder', {
+        wallet: demoWallet,
+        direction,
+        quantity,
+        tokenSymbol,
+        orderPrice
+      }).then(res =>{
+        console.log(res.data);
+        alert('Success');
+      });
+    }
   };
+  
+
+  console.log(walletManager);
 
   return (
     <Box className={classes.root}>
@@ -101,31 +153,9 @@ const MakeOrder: FC = () => {
             component="h6"
           >
             Available Balance:{' '}
-            <span className={classes.span}>1000 {tokenSymbol}</span>
+            <span className={classes.span}> {tokenSymbol}</span>
           </Typography>
         </TabPanel>
-        <Box className={classes.inputWrap}>
-          <label className={classes.normalText}>Order Price</label>
-          <TextField
-            size="small"
-            type="number"
-            className={classes.input}
-            label="USDT"
-            value={orderPrice}
-            onChange={handleOrderPriceChange}
-          />
-        </Box>
-        <Box className={classes.inputWrap}>
-          <label className={classes.normalText}>Quantity</label>
-          <TextField
-            size="small"
-            type="number"
-            className={classes.input}
-            label={tokenSymbol}
-            value={quantity}
-            onChange={handleQuantityChange}
-          />
-        </Box>
         <Box className={classes.inputWrap}>
           <label className={classes.normalText}>Order Mode</label>
           <Select
@@ -139,10 +169,35 @@ const MakeOrder: FC = () => {
             <MenuItem value={'limit'}>Limit</MenuItem>
           </Select>
         </Box>
+
+        {mode === 'market' ? '' : <Box className={classes.inputWrap}>
+          <label className={classes.normalText}>Order Price</label>
+          <TextField
+            size="small"
+            type="number"
+            className={classes.input}
+            label="USDT"
+            value={orderPrice}
+            onChange={handleOrderPriceChange}
+          />
+        </Box>}
+        
+        <Box className={classes.inputWrap}>
+          <label className={classes.normalText}>Quantity</label>
+          <TextField
+            size="small"
+            type="number"
+            className={classes.input}
+            label={tokenSymbol}
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
+        </Box>
       </TabsUnstyled>
       <Box className={classes.inputWrap}>
         <label className={classes.normalText}>
-          Available {direction === 'buy' ? 'USDT' : tokenSymbol}: 1000
+          Available {direction === 'buy' ? 'USDT' : tokenSymbol} :  
+          {walletManager && walletManager[direction === 'buy' ? 'USDT' : tokenSymbol].total}
         </label>
       </Box>
       <Button

@@ -9,25 +9,6 @@ const baseAPIUrl = "http://localhost:8000";
 const ccxt = require('ccxt');
 
 
-async function walletMain(walletKey, action) {
-  const binance = new ccxt.binance(
-    {
-      apiKey: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
-      api_key: 'KS0Kqr4tBLjH2hT4CD6gHwZXaadx2V3apNqeiW9tnAhceX24Hbqeo9aaZVHLYSKF',
-      secret:'rdHRqRrY4u6HpeXx01ZoeLsu59EnnKDAlXeO1Umk66HBmKYku4HMv20olDj0rFqC'
-    }
-  );
-
-  binance.setSandboxMode(true);
-  const balance = await binance.fetchBalance();
-    
-  
-  console.log(balance);
-
-  return balance;
-}
-
-
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -56,11 +37,11 @@ app.use("/api/*", async (req, res) => {
 });
 
 // test binance bot
-app.use("/test", async (req, res) => {
+app.use("/test/getBalance", async (req, res) => {
   const { method, originalUrl, headers, body } = req;
   console.log(body)
   try {
-    const data = await walletMain(body, null);
+    const data = await getBalance(body);
     
     return res.json(data)
   } catch (err) {
@@ -68,4 +49,84 @@ app.use("/test", async (req, res) => {
   }
 });
 
+
+
+// market order
+app.use("/test/makeMarketOrder", async (req, res) => {
+  const { body } = req;
+  const {wallet, tokenSymbol, direction, quantity} = body;
+  try {
+    const order = await createMarketOrder(wallet, tokenSymbol, direction, quantity);
+    return res.json(order)
+  } catch (err) {
+    return res.status(err.status ?? 500).send(err.message);
+  }
+});
+
+// market order
+app.use("/test/makeLimitOrder", async (req, res) => {
+  const { body } = req;
+  const {wallet, tokenSymbol, direction, quantity, orderPrice} = body;
+  try {
+    const order = await makeLimitOrder(wallet, tokenSymbol, direction, quantity, orderPrice);
+    return res.json(order)
+  } catch (err) {
+    return res.status(err.status ?? 500).send(err.message);
+  }
+});
+
+
+
 app.listen(port, () => console.log(`App listening on port ${port}!`));
+
+
+
+
+
+
+
+// wallet function
+
+async function getBalance(walletKey) {
+  const binance = new ccxt.binance(
+    {
+      ...walletKey
+    }
+  );
+
+  binance.setSandboxMode(true);
+  const balance = await binance.fetchBalance();
+
+  return balance;
+}
+
+async function createMarketOrder(wallet, tokenSymbol, direction, quantity) {
+
+ 
+  const binance = new ccxt.binance(
+    {
+      ...wallet
+    }
+  );
+  
+
+  binance.setSandboxMode(true);
+  const order = await binance.createMarketOrder(`${tokenSymbol}/USDT`, direction, quantity);
+  return order;
+}
+
+
+async function makeLimitOrder(wallet, tokenSymbol, direction, quantity, orderPrice) {
+
+  
+  const binance = new ccxt.binance(
+    {
+      ...wallet
+    }
+  );
+  
+
+  binance.setSandboxMode(true);
+  const order = await binance.createLimitOrder(`${tokenSymbol}/USDT`, direction, quantity,orderPrice);
+  return order;
+}
