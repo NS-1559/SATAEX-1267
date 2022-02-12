@@ -76,7 +76,7 @@ const P2pTable: FC = (props: any) => {
           }}
         >
           <Typography variant="h4" sx={{ fontWeight: 'medium' }}>
-            P2p Markets
+            P2P Markets
           </Typography>
           <Button
             onClick={() => {

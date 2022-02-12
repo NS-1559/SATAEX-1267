@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 import { makeStyles, withStyles } from '@mui/styles';
+import { parseJwt } from '@utils/parseJwt';
 
 const useStyles = makeStyles({
   root: {
@@ -181,27 +182,43 @@ const Order: NextPage = () => {
   const { t } = useTranslate();
   const router = useRouter();
   const token = Cookies.get('token');
-  // const [tokenList, setTokenList] = useState([]);
-  // const [rows, setRow] = useState([] as any[]);
+  const tokenData = parseJwt(token);
+  const [tokenSymbolList, setTokenSymbolList] = useState([]);
+  const [ordersManager, setOrdersManagers] = useState();
+
+  const demoWallet = {
+    apiKey: tokenData.api_key,
+    secret: tokenData.secret_key,
+  };
+
+  // console.log(demoWallet);
 
   useEffect(() => {
     if (!token) {
       router.push('vi/auth/login');
     }
-    axios.get('http://127.0.0.1:8000/api/orders').then((response: any) => {
-      // setTokenList(response.data);
-      console.log(response.data);
-      // setRow(rowList);
+    axios.get('http://127.0.0.1:8000/api/asset').then((response: any) => {
+      axios
+        .post('http://localhost:5000/test/orders', {
+          wallet: demoWallet,
+          tokenSymbolList: response.data,
+        })
+        .then(function (res) {
+          setTokenSymbolList(response.data);
+          const data = [];
+          for (let i = 0; i < res.data.length; i++) {
+            for (let j = 0; j < res.data[i].length; j++) {
+              data.push(res.data[i][j]);
+            }
+          }
+          setOrdersManagers(data);
+        })
+        .catch(function (error) {});
     });
-  }, [router, token]);
+  }, []);
+  console.log(ordersManager);
+  console.log(tokenSymbolList);
 
-  // const options = tokenList.map((option: any) => {
-  //   const firstLetter = option.symbol[0].toUpperCase();
-  //   return {
-  //     firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
-  //     ...option,
-  //   };
-  // });
   return (
     <>
       <Seo title={t('app.assets.title')} />
@@ -287,53 +304,56 @@ const Order: NextPage = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {dataTable.map((row: any) => (
-                    <TableRow
-                      key={row.time}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCellFix
-                        className={classes.text}
-                        component="th"
-                        scope="row"
+                  {ordersManager &&
+                    ordersManager.map((row: any) => (
+                      <TableRow
+                        key={row.datetime}
+                        sx={{
+                          '&:last-child td, &:last-child th': { border: 0 },
+                        }}
                       >
-                        {row.tradingPair}
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="left">
-                        {row.time}
-                      </TableCellFix>
-                      <TableCellFix
-                        className={`${classes.text} ${
-                          row.direction === 'Buy'
-                            ? classes.greenText
-                            : classes.redText
-                        }`}
-                        align="right"
-                      >
-                        {row.direction}
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="right">
-                        {row.price}
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="right">
-                        {row.quantity}
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="right">
-                        {row.price * row.quantity} USDT
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="right">
-                        {row.type}
-                      </TableCellFix>
-                      <TableCellFix className={classes.text} align="right">
-                        {row.status}
-                      </TableCellFix>
-                      {row.status === 'pending' && (
-                        <TableCellFix className={classes.text} align="right">
-                          <span className={classes.cancelButton}>cancel</span>
+                        <TableCellFix
+                          className={classes.text}
+                          component="th"
+                          scope="row"
+                        >
+                          {row.symbol}
                         </TableCellFix>
-                      )}
-                    </TableRow>
-                  ))}
+                        <TableCellFix className={classes.text} align="left">
+                          {row.datetime}
+                        </TableCellFix>
+                        <TableCellFix
+                          className={`${classes.text} ${
+                            row.side === 'buy'
+                              ? classes.greenText
+                              : classes.redText
+                          }`}
+                          align="right"
+                        >
+                          {row.side}
+                        </TableCellFix>
+                        <TableCellFix className={classes.text} align="right">
+                          {row.price}
+                        </TableCellFix>
+                        <TableCellFix className={classes.text} align="right">
+                          {row.amount}
+                        </TableCellFix>
+                        <TableCellFix className={classes.text} align="right">
+                          {row.price * row.amount} USDT
+                        </TableCellFix>
+                        <TableCellFix className={classes.text} align="right">
+                          {row.type}
+                        </TableCellFix>
+                        <TableCellFix className={classes.text} align="right">
+                          {row.status}
+                        </TableCellFix>
+                        {row.status === 'pending' && (
+                          <TableCellFix className={classes.text} align="right">
+                            <span className={classes.cancelButton}>cancel</span>
+                          </TableCellFix>
+                        )}
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>

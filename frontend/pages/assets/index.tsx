@@ -237,35 +237,11 @@ const Assets: NextPage = () => {
           </Box>
           <Box
             sx={{
-              // height: '100vh',
               backgroundColor: '#fff',
               marginTop: 5,
               borderRadius: 2,
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: 3,
-              }}
-            >
-              <Autocomplete
-                id="grouped-demo"
-                options={options.sort(
-                  (a, b) => -b.firstLetter.localeCompare(a.firstLetter),
-                )}
-                getOptionLabel={(option) => option.symbol}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Search" />
-                )}
-              />
-              <Button variant="contained" size="small">
-                Trade spot now
-              </Button>
-            </Box>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
