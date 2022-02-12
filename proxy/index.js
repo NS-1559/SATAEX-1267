@@ -1,25 +1,23 @@
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
-const bodyParser = require("body-parser");
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 5000;
-const baseAPIUrl = "http://localhost:8000";
+const baseAPIUrl = 'http://localhost:8000';
 const ccxt = require('ccxt');
-
-
 
 app.use(cors());
 app.use(bodyParser.json());
 
 // auth
-app.use("/api/*", async (req, res) => {
+app.use('/api/*', async (req, res) => {
   const { method, originalUrl, headers, body } = req;
 
   const requestConfigs = {
     method,
-    url: `${baseAPIUrl}${originalUrl ?? "/"}`,
+    url: `${baseAPIUrl}${originalUrl ?? '/'}`,
     data: body,
   };
 
@@ -37,58 +35,74 @@ app.use("/api/*", async (req, res) => {
 });
 
 // test binance bot
-app.use("/test/getBalance", async (req, res) => {
+app.use('/test/getBalance', async (req, res) => {
   const { method, originalUrl, headers, body } = req;
-  console.log(body)
+  console.log(body);
   try {
     const data = await getBalance(body);
-    
-    return res.json(data)
-  } catch (err) {
-    return res.status(err.status ?? 500).send(err.message);
-  }
-});
-
-
-
-// market order
-app.use("/test/makeMarketOrder", async (req, res) => {
-  const { body } = req;
-  const {wallet, tokenSymbol, direction, quantity} = body;
-  try {
-    const order = await createMarketOrder(wallet, tokenSymbol, direction, quantity);
-    return res.json(order)
+    return res.json(data);
   } catch (err) {
     return res.status(err.status ?? 500).send(err.message);
   }
 });
 
 // market order
-app.use("/test/makeLimitOrder", async (req, res) => {
+app.use('/test/makeMarketOrder', async (req, res) => {
   const { body } = req;
-  const {wallet, tokenSymbol, direction, quantity, orderPrice} = body;
+  const { wallet, tokenSymbol, direction, quantity } = body;
   try {
-    const order = await makeLimitOrder(wallet, tokenSymbol, direction, quantity, orderPrice);
-    return res.json(order)
+    const order = await createMarketOrder(
+      wallet,
+      tokenSymbol,
+      direction,
+      quantity,
+    );
+    return res.json(order);
   } catch (err) {
     return res.status(err.status ?? 500).send(err.message);
   }
 });
 
+// limit order
+app.use('/test/makeLimitOrder', async (req, res) => {
+  const { body } = req;
+  const { wallet, tokenSymbol, direction, quantity, orderPrice } = body;
+  try {
+    const order = await makeLimitOrder(
+      wallet,
+      tokenSymbol,
+      direction,
+      quantity,
+      orderPrice,
+    );
 
+    return res.json(order);
+  } catch (err) {
+    return res.status(err.status ?? 500).send(err.message);
+  }
+});
+
+// fetch all orders
+app.use('/test/orders', async (req, res) => {
+  const { body } = req;
+  const { wallet, tokenSymbolList } = body;
+  try {
+    const orderList = await fetchAllOrders(wallet, tokenSymbolList);
+    return res.json(orderList);
+  } catch (err) {
+    return res.status(err.status ?? 500).send(err.message);
+  }
+});
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
-
-
 
 // wallet function
 
 async function getBalance(walletKey) {
-  const binance = new ccxt.binance(
-    {
-      ...walletKey
-    }
-  );
+  const binance = new ccxt.binance({
+    ...walletKey,
+  });
+  console.log(walletKey);
 
   binance.setSandboxMode(true);
   const balance = await binance.fetchBalance();
@@ -97,32 +111,63 @@ async function getBalance(walletKey) {
 }
 
 async function createMarketOrder(wallet, tokenSymbol, direction, quantity) {
-
- 
-  const binance = new ccxt.binance(
-    {
-      ...wallet
-    }
-  );
-  
-
+  const binance = new ccxt.binance({
+    ...wallet,
+  });
   binance.setSandboxMode(true);
-  const order = await binance.createMarketOrder(`${tokenSymbol}/USDT`, direction, quantity);
+
+  const order = await binance.createMarketOrder(
+    `${tokenSymbol}/USDT`,
+    direction,
+    quantity,
+  );
+
   return order;
 }
 
-
-async function makeLimitOrder(wallet, tokenSymbol, direction, quantity, orderPrice) {
-
-  
-  const binance = new ccxt.binance(
-    {
-      ...wallet
-    }
-  );
-  
+async function makeLimitOrder(
+  wallet,
+  tokenSymbol,
+  direction,
+  quantity,
+  orderPrice,
+) {
+  const binance = new ccxt.binance({
+    ...wallet,
+  });
 
   binance.setSandboxMode(true);
-  const order = await binance.createLimitOrder(`${tokenSymbol}/USDT`, direction, quantity,orderPrice);
+  const order = await binance.createLimitOrder(
+    `${tokenSymbol}/USDT`,
+    direction,
+    quantity,
+    orderPrice,
+  );
   return order;
+}
+
+async function fetchAllOrders(wallet, tokenSymbolList) {
+  const binance = new ccxt.binance({
+    ...wallet,
+  });
+
+  console.log(wallet, tokenSymbolList);
+
+  binance.setSandboxMode(true);
+
+  const data = [];
+
+  for (let i = 0; i < tokenSymbolList.length; i++) {
+    console.log(`${tokenSymbolList[i].symbol}/USDT`);
+    const tokenOrders = await binance.fetchOrders(
+      `${tokenSymbolList[i].symbol}/USDT`,
+    );
+    data.push(tokenOrders);
+    // data = [...data, ...tokenOrders];
+  }
+  console.log('data', data);
+  //console.log(data)
+
+  //return orderList;
+  return data;
 }

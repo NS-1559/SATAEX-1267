@@ -27,8 +27,8 @@ class UserSeeder extends Seeder
             'last_name' => 'Đỗ',
             'address' => 'Hà Nội',
             'phone_number' => '09623456789',
-            'api_key' => 'ERgNZm0rkiUfDLQvFhvPTONOIkgoi0Np6sdcRlF2ahHpW4DJKvh4xQ8DkSHMOUSw',
-            'secret_key' => 'bZXxeroTxFuwS6AGp5y4KKGv0mxogjv0XivBciIbBPiwjvt6qtlhAPIYmQK7DVkB',
+            'api_key' => 'hl6IKtPNQX59mjK1VLamKk00hQ9fL3Pirl8ESKpXWP6sH9lOpTvMPx3MoHvbnzDV',
+            'secret_key' => 'NtApDfr1qZlRaNFBR3r4AxJETET55l2HtcftTgHJ1AiOV2fDiI5qZWvnMZNdoVFG',
        ]);
        User::factory()->create([
             'first_name' => 'Kỳ Anh',
